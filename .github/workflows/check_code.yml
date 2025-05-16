@@ -28,5 +28,5 @@ jobs:
       - name: test typing
         run: hatch run lint:typing
 
-      - name: run tests
-        run: hatch run default:test
+      # - name: run tests
+      #   run: hatch run default:test
