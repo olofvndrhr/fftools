@@ -1,0 +1,31 @@
+name: update changelog
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  update-changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: install auto-changelog
+        run: npm install auto-changelog
+
+      - name: generate changelog
+        run: >-
+          npx auto-changelog -t keepachangelog
+          --commit-limit 50 --backfill-limit 50
+          --ignore-commit-pattern '[Bb]ump version|[Uu]pdate changelog|[Mm]erge pull request'
+
+      - name: commit and push changelog
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: CHANGELOG.md
+          message: "[bot] update changelog"

@@ -1,0 +1,27 @@
+name: check code
+
+on:
+  push:
+    branches: [main, master]
+
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  check-code:
+    runs-on: python3.12
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: install hatch
+        run: pip install -U hatch
+
+      - name: test codestyle
+        run: hatch run lint:style
+
+      - name: test typing
+        run: hatch run lint:typing
+
+      - name: run tests
+        run: hatch run default:test
