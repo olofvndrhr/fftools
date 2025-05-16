@@ -93,7 +93,7 @@ dependencies = [
 ]
 
 [tool.hatch.envs.docs.scripts]
-build = "sphinx-build -M html docs docs/_build {args:}"
+build = "sphinx-build -M html {root}/docs {root}/docs/_build {args:}"
 
 ###
 ### ruff
