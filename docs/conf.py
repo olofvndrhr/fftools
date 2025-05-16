@@ -4,13 +4,15 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path("..", "src").resolve()))
 
+from fftools.__about__ import __version__
+
 
 ### sphinx config ###
 
 project = "fftools"
 copyright = "2025-now, Ivan Schaller"  # noqa
 author = "Ivan Schaller"
-release = "1.0.0"
+release = __version__
 
 extensions = [
     "sphinx.ext.autodoc",
