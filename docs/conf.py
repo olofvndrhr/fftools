@@ -38,11 +38,22 @@ autodoc_default_options = {
 }
 autodoc_typehints = "both"
 autodoc_typehints_description_target = "all"
+autodoc_member_order = "alphabetical"
+
+### extlinks ###
+
+extlinks = {
+    "github": ("https://github.com/%s", "%s"),
+    "pypi": ("https://pypi.org/project/%s/", "%s"),
+}
+extlinks_detect_hardcoded_links = True
+
 
 ### intersphinx ###
 
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
+    "sphinx": ("https://www.sphinx-doc.org/en/master", None),
 }
 
 
