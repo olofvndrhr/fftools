@@ -8,6 +8,8 @@ for n in src/*/*.py; do
         continue
     fi
 
+    mkdir -p docs/modules
+
     echo "creating docs for: ${module_name}"
     cat << EOF > "docs/modules/${module_name}.rst"
 ============================

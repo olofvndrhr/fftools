@@ -30,17 +30,19 @@ pages/*
 ## Api docs
 
 ```{toctree}
-:caption: development
-:maxdepth: 2
-
-changelog
-license
-```
-
-```{toctree}
 :caption: modules:
 :maxdepth: 2
 :glob:
 
 modules/*
+```
+
+---
+
+```{toctree}
+:caption: development
+:maxdepth: 2
+
+license
+changelog
 ```
