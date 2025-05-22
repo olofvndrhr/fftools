@@ -19,7 +19,7 @@ classifiers = [
 dependencies = [
     "dnspython~=2.7.0",
     "httpx~=0.28.1",
-    "loguru~=0.7.1",
+    "loguru~=0.7.3",
     "Fabric~=3.2.2",
     "tenacity~=8.2.3",
     "yagmail~=0.15.293",
@@ -51,8 +51,8 @@ packages = ["src/fftools"]
 [tool.hatch.envs.test]
 python = "3.12"
 dependencies = [
-    "pytest==8.2.2",
-    "coverage==7.5.3",
+    "pytest=~8.3.5",
+    "coverage=~7.8.0",
 ]
 
 [tool.hatch.envs.test.scripts]
@@ -65,9 +65,9 @@ cov = ["test-cov", "cov-report"]
 python = "3.12"
 detached = true
 dependencies = [
-    "mypy==1.15.0",
-    "ruff==0.11.10",
-    "pydantic==2.11.4",
+    "mypy=~1.15.0",
+    "ruff=~0.11.10",
+    "pydantic~=2.11.4",
 ]
 
 [tool.hatch.envs.lint.scripts]
