@@ -29,9 +29,9 @@ jobs:
         run: hatch run docs:build
 
       - name: deploy page
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: peaceiris/actions-gh-pages@v4
         if: github.event_name != 'pull_request'
         with:
-          branch: gh-pages
-          folder: docs/_build/html
-          token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/_build/html
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          cname: fftools.vsfl.org
