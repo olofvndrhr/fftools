@@ -8,6 +8,8 @@ on:
   pull_request:
     branches: [main, master]
 
+  workflow_dispatch:
+
 jobs:
   build-docs:
     runs-on: ubuntu-latest
@@ -25,3 +27,11 @@ jobs:
 
       - name: build docs
         run: hatch run docs:build
+
+      - name: deploy page
+        uses: JamesIves/github-pages-deploy-action@v4
+        if: github.event_name != 'pull_request'
+        with:
+          branch: gh-pages
+          folder: docs/_build/html
+          token: ${{ secrets.GITHUB_TOKEN }}
