@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling>=1.24", "hatch-regex-commit>=0.0.3"]
+requires = ["hatchling==1.27.0", "hatch-regex-commit==0.0.3"]
 build-backend = "hatchling.build"
 
 [project]
@@ -11,9 +11,6 @@ requires-python = ">=3.12"
 dynamic = ["version"]
 authors = [{ name = "Ivan Schaller", email = "ivan@schaller.sh" }]
 classifiers = [
-    "License :: OSI Approved :: MIT License",
-    "Natural Language :: English",
-    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3.12",
 ]
 dependencies = [
@@ -51,8 +48,8 @@ packages = ["src/fftools"]
 [tool.hatch.envs.test]
 python = "3.12"
 dependencies = [
-    "pytest~=8.3.5",
-    "coverage~=7.8.0",
+    "pytest==8.4.1",
+    "coverage==7.10.0",
 ]
 
 [tool.hatch.envs.test.scripts]
@@ -65,9 +62,9 @@ cov = ["test-cov", "cov-report"]
 python = "3.12"
 detached = true
 dependencies = [
-    "mypy~=1.15.0",
-    "ruff~=0.11.10",
-    "pydantic~=2.11.4",
+    "mypy==1.17.0",
+    "ruff==0.12.5",
+    "pydantic~=2.11.5",
 ]
 
 [tool.hatch.envs.lint.scripts]
