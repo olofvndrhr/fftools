@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
-        <title>fftools.logger - fftools 2.0.2 documentation</title>
+        <title>fftools.logger - fftools 2.0.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=25af2a20" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -166,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">fftools 2.0.2 documentation</div></a>
+      <a href="../../index.html"><div class="brand">fftools 2.0.3 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -189,7 +189,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
-  <span class="sidebar-brand-text">fftools 2.0.2 documentation</span>
+  <span class="sidebar-brand-text">fftools 2.0.3 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -250,14 +250,55 @@
         <article role="main" id="furo-main-content">
           <h1>Source code for fftools.logger</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">loguru</span><span class="w"> </span><span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">whenever</span><span class="w"> </span><span class="kn">import</span> <span class="n">Instant</span><span class="p">,</span> <span class="n">ZonedDateTime</span>
 
 
-<span class="n">LOGURU_FMT</span> <span class="o">=</span> <span class="s2">&quot;{time:%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S%z} &lt;level&gt;[</span><span class="si">{level: &lt;7}</span><span class="s2">]&lt;/level&gt; [</span><span class="si">{name: &lt;10}</span><span class="s2">] [</span><span class="si">{function: &lt;20}</span><span class="s2">]: </span><span class="si">{message}</span><span class="s2">&quot;</span>
+<div class="viewcode-block" id="Timestamp">
+<a class="viewcode-back" href="../../modules/fftools.logger.html#fftools.logger.Timestamp">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Timestamp</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;timestamp class for logging related strings.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Timestamp.__init__">
+<a class="viewcode-back" href="../../modules/fftools.logger.html#fftools.logger.Timestamp.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timezone</span><span class="o">=</span><span class="s2">&quot;Europe/Zurich&quot;</span><span class="p">,</span> <span class="n">timestamp_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;set timezone and format specific preferences.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            timezone: timezone to use for timestamps.</span>
+<span class="sd">                Defaults to DEFAULT_TIMEZONE.</span>
+<span class="sd">            timestamp_format: `strftime` format string to use for timestamps.</span>
+<span class="sd">                Defaults to DEFAULT_TS_FULL.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timezone</span> <span class="o">=</span> <span class="n">timezone</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestamp_format</span> <span class="o">=</span> <span class="n">timestamp_format</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">datetime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ZonedDateTime</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Instant</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">to_tz</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timezone</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">now</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">py_datetime</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp_format</span><span class="p">)</span>  <span class="c1"># type: ignore[no-any-return]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">now_crossplatform</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&quot;|:|&lt;|&gt;|/|</span><span class="se">\\</span><span class="s1">|\||\?|\*&#39;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">now</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ts_ymd</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">py_datetime</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># type: ignore[no-any-return]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ts_hms</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">py_datetime</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">)</span>  <span class="c1"># type: ignore[no-any-return]</span></div>
+
 
 
 <div class="viewcode-block" id="InterceptHandler">
@@ -294,20 +335,22 @@
 <span class="sd">        loglevel: level to set. 10 = debug, 20 = info, 30 = warning, etc.</span>
 <span class="sd">        logfile: logfile to write log messages into.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logfmt</span> <span class="o">=</span> <span class="s2">&quot;{time:%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S%z} &lt;level&gt;[</span><span class="si">{level: &lt;7}</span><span class="s2">]&lt;/level&gt; [</span><span class="si">{name: &lt;10}</span><span class="s2">] [</span><span class="si">{function: &lt;20}</span><span class="s2">]: </span><span class="si">{message}</span><span class="s2">&quot;</span>
+
     <span class="n">stdout_handler</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;sink&quot;</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span>
         <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="n">loglevel</span><span class="p">,</span>
-        <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="n">LOGURU_FMT</span><span class="p">,</span>
+        <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="n">logfmt</span><span class="p">,</span>
     <span class="p">}</span>
     <span class="n">file_handler</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;sink&quot;</span><span class="p">:</span> <span class="n">logfile</span><span class="p">,</span>
         <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="n">loglevel</span><span class="p">,</span>
-        <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="n">LOGURU_FMT</span><span class="p">,</span>
+        <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="n">logfmt</span><span class="p">,</span>
     <span class="p">}</span>
     <span class="n">handlers</span> <span class="o">=</span> <span class="p">[</span><span class="n">stdout_handler</span><span class="p">,</span> <span class="n">file_handler</span><span class="p">]</span> <span class="k">if</span> <span class="n">logfile</span> <span class="k">else</span> <span class="p">[</span><span class="n">stdout_handler</span><span class="p">]</span>
 
     <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">handlers</span><span class="o">=</span><span class="p">[</span><span class="n">InterceptHandler</span><span class="p">()],</span> <span class="n">level</span><span class="o">=</span><span class="n">loglevel</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">handlers</span><span class="o">=</span><span class="n">handlers</span><span class="p">)</span>  <span class="c1"># pyright: ignore</span></div>
+    <span class="n">logger</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">handlers</span><span class="o">=</span><span class="n">handlers</span><span class="p">)</span>  <span class="c1"># pyright: ignore[reportArgumentType]</span></div>
 
 </pre></div>
         </article>
@@ -341,7 +384,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=c2377ec0"></script>
+</div><script src="../../_static/documentation_options.js?v=664ffad9"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
