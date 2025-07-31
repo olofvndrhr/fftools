@@ -10,10 +10,7 @@ LOGURU_FMT = "{time:%Y-%m-%dT%H:%M:%S%z} <level>[{level: <7}]</level> [{name: <1
 
 
 class InterceptHandler(logging.Handler):
-    """intercept python logging messages and log them via loguru.logger.
-
-    :param Handler logging: log handler
-    """
+    """Intercept python logging messages and log them via loguru.logger."""
 
     def emit(self, record: Any) -> None:
         # Get corresponding Loguru level if it exists
@@ -31,11 +28,12 @@ class InterceptHandler(logging.Handler):
         logger.opt(depth=depth, exception=record.exc_info).log(level, record.getMessage())
 
 
-def prepare_logger(loglevel: int = 20, logfile: Path | None = None) -> None:
-    """prepare loguru logger and create intercept handle, to capture other logs.
+def prepare_logger(loglevel: int = 20, logfile: Path | None) -> None:
+    """init logger with specified loglevel and logfile.
 
-    :param int loglevel: loglevel to set, defaults to 20
-    :param Path | None logfile: logfile to save logs to. not saved to file if None, defaults to None
+    Args:
+        loglevel: level to set. 10 = debug, 20 = info, 30 = warning, etc.
+        logfile: logfile to write log messages into.
     """
     stdout_handler: dict[str, Any] = {
         "sink": sys.stdout,
@@ -47,8 +45,7 @@ def prepare_logger(loglevel: int = 20, logfile: Path | None = None) -> None:
         "level": loglevel,
         "format": LOGURU_FMT,
     }
-
-    handler_config = [stdout_handler, file_handler] if logfile else [stdout_handler]
+    handlers = [stdout_handler, file_handler] if logfile else [stdout_handler]
 
     logging.basicConfig(handlers=[InterceptHandler()], level=loglevel)
-    logger.configure(handlers=handler_config)
+    logger.configure(handlers=handlers)  # type:ignore
