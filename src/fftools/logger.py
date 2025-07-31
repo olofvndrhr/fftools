@@ -48,4 +48,4 @@ def prepare_logger(loglevel: int = 20, logfile: Path | None = None) -> None:
     handlers = [stdout_handler, file_handler] if logfile else [stdout_handler]
 
     logging.basicConfig(handlers=[InterceptHandler()], level=loglevel)
-    logger.configure(handlers=handlers)  # type:ignore
+    logger.configure(handlers=handlers)  # pyright: ignore
