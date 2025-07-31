@@ -21,23 +21,28 @@ setup:
     asdf install
 
 create_venv:
-    @echo "creating venv"
+    @echo "creating venvs"
     hatch env create
     hatch env show
 
+create_reqs:
+    @echo "creating requirements files"
+    hatch dep show requirements --project-only > requirements.txt
+    hatch dep show requirements --env-only > requirements_dev.txt
+
+create_pipreqs:
+    @echo "creating requirements (pipreqs)"
+    pipreqs --force --savepath requirements.txt src/
+
 install_deps:
-    @echo "installing dependencies"
-    python3 -m hatch dep show requirements --project-only > requirements.tmp
-    pip3 install -r requirements.tmp
+    @echo "installing dependencies locally"
+    hatch dep show requirements --project-only > requirements.tmp
+    pip install -r requirements.tmp
 
 install_deps_dev:
-    @echo "installing dev dependencies"
-    python3 -m hatch dep show requirements --env-only > requirements_dev.tmp
-    pip3 install -r requirements_dev.tmp
-
-create_reqs:
-    @echo "creating requirements"
-    pipreqs --force --savepath requirements.txt src/
+    @echo "installing dev dependencies locally"
+    hatch dep show requirements --env-only > requirements_dev.tmp
+    pip install -r requirements_dev.tmp
 
 test_shfmt:
     @echo "testing with shfmt"
@@ -58,6 +63,10 @@ format:
     just show_system_info
     just format_shfmt
     hatch run lint:fmt
+
+check:
+    just format
+    just lint
 
 test:
     @echo "running tests"
