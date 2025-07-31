@@ -28,7 +28,7 @@ class InterceptHandler(logging.Handler):
         logger.opt(depth=depth, exception=record.exc_info).log(level, record.getMessage())
 
 
-def prepare_logger(loglevel: int = 20, logfile: Path | None) -> None:
+def prepare_logger(loglevel: int = 20, logfile: Path | None = None) -> None:
     """init logger with specified loglevel and logfile.
 
     Args:
