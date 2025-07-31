@@ -5,17 +5,6 @@ from time import sleep
 from typing import Any
 
 from loguru import logger as log
-from whenever import Instant
-
-
-# current date for TZ=Europe/Zurich
-CURRENT_DATE = Instant.now().to_tz("Europe/Zurich")
-# timestamp (str) in format: YYYY-MM-DD
-TIMESTAMP_YMD = f"{str(CURRENT_DATE.year).zfill(4)}-{str(CURRENT_DATE.month).zfill(2)}-{str(CURRENT_DATE.day).zfill(2)}"
-# timestamp (str) in format: hh-mm-ss
-TIMESTAMP_HMS = f"{str(CURRENT_DATE.hour).zfill(2)}-{str(CURRENT_DATE.minute).zfill(2)}-{str(CURRENT_DATE.second).zfill(2)}"
-# timestamp (str) in format: YYYY-MM-DD_hh-mm-ss
-TIMESTAMP_FULL = f"{TIMESTAMP_YMD}T{TIMESTAMP_HMS}"
 
 
 def progress_bar(progress: float, total: float) -> None:
