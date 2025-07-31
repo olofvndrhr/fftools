@@ -29,7 +29,7 @@ class Timestamp:
 
     @property
     def now(self) -> str:
-        return self.datetime.py_datetime().strftime(self.timestamp_format)
+        return self.datetime.py_datetime().strftime(self.timestamp_format)  # type: ignore[no-any-return]
 
     @property
     def now_crossplatform(self) -> str:
@@ -37,11 +37,11 @@ class Timestamp:
 
     @property
     def ts_ymd(self) -> str:
-        return self.datetime.py_datetime().strftime("%Y-%m-%d")
+        return self.datetime.py_datetime().strftime("%Y-%m-%d")  # type: ignore[no-any-return]
 
     @property
     def ts_hms(self) -> str:
-        return self.datetime.py_datetime().strftime("%H:%M:%S")
+        return self.datetime.py_datetime().strftime("%H:%M:%S")  # type: ignore[no-any-return]
 
 
 class InterceptHandler(logging.Handler):
@@ -85,4 +85,4 @@ def prepare_logger(loglevel: int = 20, logfile: Path | None = None) -> None:
     handlers = [stdout_handler, file_handler] if logfile else [stdout_handler]
 
     logging.basicConfig(handlers=[InterceptHandler()], level=loglevel)
-    logger.configure(handlers=handlers)  # pyright: ignore
+    logger.configure(handlers=handlers)  # pyright: ignore[reportArgumentType]

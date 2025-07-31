@@ -1,5 +1,8 @@
 [build-system]
-requires = ["hatchling==1.27.0", "hatch-regex-commit==0.0.3"]
+requires = [
+    "hatchling==1.27.0",
+    "hatch-regex-commit==0.0.3",
+]
 build-backend = "hatchling.build"
 
 [project]
@@ -9,7 +12,9 @@ readme = "README.md"
 license = "MIT"
 requires-python = ">=3.12"
 dynamic = ["version"]
-authors = [{ name = "Ivan Schaller", email = "ivan@schaller.sh" }]
+authors = [
+    { name = "Ivan Schaller", email = "ivan@schaller.sh" },
+]
 classifiers = [
     "Programming Language :: Python :: 3.12",
 ]
@@ -29,10 +34,9 @@ History  = "https://github.com/olofvndrhr/fftools/commits/master"
 Tracker  = "https://github.com/olofvndrhr/fftools/issues"
 Source   = "https://github.com/olofvndrhr/fftools"
 
-
 [tool.hatch.version]
-source = "regex_commit"
-path = "src/fftools/__about__.py"
+source   = "regex_commit"
+path     = "src/fftools/__about__.py"
 tag_sign = false
 
 [tool.hatch.build.targets.sdist]
@@ -54,15 +58,22 @@ dependencies = [
 
 [tool.hatch.envs.test.scripts]
 test = "pytest {args:tests}"
-test-cov = ["coverage erase", "coverage run -m pytest {args:tests}"]
-cov-report = ["- coverage combine", "coverage report", "coverage xml"]
+test-cov = [
+    "coverage erase",
+    "coverage run -m pytest {args:tests}",
+]
+cov-report = [
+    "- coverage combine",
+    "coverage report",
+    "coverage xml",
+]
 cov = ["test-cov", "cov-report"]
 
 [tool.hatch.envs.lint]
 python = "3.12"
 detached = true
 dependencies = [
-    "mypy==1.17.0",
+    "mypy==1.17.1",
     "ruff==0.12.7",
     "pydantic~=2.11.5",
 ]
@@ -71,12 +82,12 @@ dependencies = [
 typing = "mypy --non-interactive --install-types {args:src/fftools}"
 style = [
     "ruff check --no-fix {args:.}",
-    "ruff format --diff {args:.}"
+    "ruff format --diff {args:.}",
 ]
 fmt = [
     "ruff check --fix {args:.}",
     "ruff format {args:.}",
-    "style"
+    "style",
 ]
 all = ["style", "typing"]
 
@@ -97,13 +108,13 @@ build = "sphinx-build -M html {root}/docs {root}/docs/_build {args:}"
 ###
 
 [tool.ruff]
-target-version = "py312"
-line-length = 100
-indent-width = 4
-fix = true
-show-fixes = true
+target-version    = "py312"
+line-length       = 100
+indent-width      = 4
+fix               = true
+show-fixes        = true
 respect-gitignore = true
-src = ["src", "tests"]
+src               = ["src", "tests"]
 
 [tool.ruff.lint]
 select = [
@@ -134,21 +145,37 @@ select = [
     "YTT",
     "D",
 ]
-ignore = ["COM812", "E501", "D103", "D100", "D102", "PLR2004", "D403", "ISC001", "FBT001", "FBT002", "FBT003"]
+ignore = [
+    "COM812",
+    "E501",
+    "D103",
+    "D100",
+    "D102",
+    "PLR2004",
+    "D403",
+    "ISC001",
+    "FBT001",
+    "FBT002",
+    "FBT003",
+]
 fixable = ["ALL"]
 unfixable = ["F401"]
 
 [tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
+quote-style               = "double"
+indent-style              = "space"
 skip-magic-trailing-comma = false
-line-ending = "lf"
-docstring-code-format = true
+line-ending               = "lf"
+docstring-code-format     = true
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["D104"]
 "__about__.py" = ["D104", "F841"]
-"tests/**/*" = ["PLR2004", "S101", "TID252"]
+"tests/**/*" = [
+    "PLR2004",
+    "S101",
+    "TID252",
+]
 "src/fftools/shell.py" = ["S603"]
 
 [tool.ruff.lint.pyupgrade]
@@ -156,7 +183,7 @@ keep-runtime-typing = true
 
 [tool.ruff.lint.isort]
 lines-after-imports = 2
-known-first-party = ["fftools"]
+known-first-party   = ["fftools"]
 
 [tool.ruff.lint.flake8-tidy-imports]
 ban-relative-imports = "all"
@@ -166,7 +193,13 @@ max-branches = 24
 max-returns = 12
 max-statements = 100
 max-args = 15
-allow-magic-value-types = ["str", "bytes", "complex", "float", "int"]
+allow-magic-value-types = [
+    "str",
+    "bytes",
+    "complex",
+    "float",
+    "int",
+]
 
 [tool.ruff.lint.mccabe]
 max-complexity = 15
@@ -183,18 +216,18 @@ max-doc-length = 100
 
 [tool.mypy]
 #plugins = ["pydantic.mypy"]
-follow_imports = "silent"
-warn_redundant_casts = true
-warn_unused_ignores = true
-disallow_any_generics = true
-check_untyped_defs = true
-no_implicit_reexport = true
+follow_imports         = "silent"
+warn_redundant_casts   = true
+warn_unused_ignores    = true
+disallow_any_generics  = true
+check_untyped_defs     = true
+no_implicit_reexport   = true
 ignore_missing_imports = true
-warn_return_any = true
-pretty = true
-show_column_numbers = true
-show_error_codes = true
-show_error_context = true
+warn_return_any        = true
+pretty                 = true
+show_column_numbers    = true
+show_error_codes       = true
+show_error_context     = true
 
 #[tool.pydantic-mypy]
 #init_forbid_extra = true
@@ -223,8 +256,11 @@ parallel    = true
 omit        = ["src/fftools/__about__.py"]
 
 [tool.coverage.paths]
-fftools = ["src/fftools", "*/fftools/src/fftools"]
-tests    = ["tests", "*/fftools/tests"]
+fftools = [
+    "src/fftools",
+    "*/fftools/src/fftools",
+]
+tests = ["tests", "*/fftools/tests"]
 
 [tool.coverage.report]
 # Regexes for lines to exclude from consideration
