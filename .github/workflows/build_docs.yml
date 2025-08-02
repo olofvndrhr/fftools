@@ -25,6 +25,9 @@ jobs:
       - name: install hatch
         run: pip install -U hatch hatchling
 
+      - name: get docs
+        run: bash docs/get_docs.sh
+
       - name: build docs
         run: hatch run docs:build
 
