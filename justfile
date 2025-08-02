@@ -52,36 +52,36 @@ format_shfmt:
     @echo "formatting with shfmt"
     find . -type f \( -name "**.sh" -and -not -path "./.**" -and -not -path "./venv**" \) -exec shfmt -w -i 4 -bn -ci -sr "{}" \+;
 
-lint:
+lint *args:
     @echo "linting project"
     just show_system_info
     just test_shfmt
-    hatch run lint:all
+    hatch run lint:all {{ args }}
 
-format:
+format *args:
     @echo "formatting project"
     just show_system_info
     just format_shfmt
-    hatch run lint:fmt
+    hatch run lint:fmt {{ args }}
 
-check:
-    just format
-    just lint
+check *args:
+    just format {{ args }}
+    just lint {{ args }}
 
-test:
+test *args:
     @echo "running tests"
     just show_system_info
-    hatch run test:test
+    hatch run test:test {{ args }}
 
-coverage:
+coverage *args:
     @echo "running tests with coverage report"
     just show_system_info
-    hatch run test:cov
+    hatch run test:cov {{ args }}
 
-build:
+build *args:
     @echo "building project"
     just show_system_info
-    hatch build --clean
+    hatch build --clean {{ args }}
 
 get-docs *args:
     @echo "getting docs"
@@ -95,5 +95,5 @@ build-docs *args:
 
 make-docs *args:
     @echo "making docs"
-    just get-docs
-    just build-docs
+    just get-docs {{ args }}
+    just build-docs {{ args }}

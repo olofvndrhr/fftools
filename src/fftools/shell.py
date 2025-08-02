@@ -18,7 +18,7 @@ def run_command(
     check_ecode: bool = True,
     **kwargs,
 ) -> tuple[int, str, str]:
-    """run local shell command.
+    """Run local shell command.
 
     Args:
         command: command to run.
@@ -27,7 +27,7 @@ def run_command(
         kwargs: other kwargs directly supplied to `subprocess.run`
 
     Raises:
-        ValueError: if command is not either a `str`, `list`, `tuple` or `set`.
+        TypeError: if command is not either a `str`, `list`, `tuple` or `set`.
         exc: if `check_ecode` is `True` and the exit code is not 0.
 
     Returns:
@@ -38,7 +38,7 @@ def run_command(
     elif isinstance(command, list | tuple | set):
         cmd = list(command)
     else:
-        raise ValueError
+        raise TypeError
 
     # remove args from kwargs
     filtered_kwargs = pop_dict(
@@ -63,7 +63,7 @@ def run_command(
         )
     except Exception as exc:
         log.error(f"can't run {command=}. {exc=}")
-        raise exc
+        raise
 
     stdout: str = proc.stdout.strip()
     stderr: str = proc.stderr.strip()
@@ -82,7 +82,7 @@ def run_ssh_command(
     password: str | None = None,
     **kwargs,
 ) -> tuple[int, str, str]:
-    """run command on remote machine via ssh.
+    """Run command on remote machine via ssh.
 
     Args:
         command: command to run.
@@ -95,7 +95,7 @@ def run_ssh_command(
         kwargs: other kwargs directly supplied to `fabric.Connection.run`
 
     Raises:
-        ValueError: if command is not either a `str`, `list`, `tuple` or `set`.
+        TypeError: if command is not either a `str`, `list`, `tuple` or `set`.
         exc: if `check_ecode` is `True` and the exit code is not 0.
 
     Returns:
@@ -106,7 +106,7 @@ def run_ssh_command(
     elif isinstance(command, list | tuple | set):
         cmd = " ".join(command)
     else:
-        raise ValueError
+        raise TypeError
 
     # remove args from kwargs
     filtered_kwargs = pop_dict(
@@ -140,7 +140,7 @@ def run_ssh_command(
             )
     except Exception as exc:
         log.error(f"can't run ssh {command=}. {exc=}")
-        raise exc
+        raise
 
     stdout: str = proc.stdout.strip()
     stderr: str = proc.stderr.strip()
@@ -150,7 +150,7 @@ def run_ssh_command(
 
 
 def extract_archive(archive: Path) -> None:
-    """extract an archive file.
+    """Extract an archive file.
 
     supportet are: tar, zip, gzip, bzip2 and xz.
 
@@ -182,7 +182,7 @@ def extract_archive(archive: Path) -> None:
 
 
 def extract_file(atype: Literal["gzip", "bzip", "xz"], infile: Path, outfile: Path) -> None:
-    """extract file.
+    """Extract file.
 
     Args:
         atype: archive type.

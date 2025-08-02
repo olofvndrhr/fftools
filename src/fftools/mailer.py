@@ -16,7 +16,7 @@ def send_mail(
     smtp_tls: bool = True,
     attachments: list[str | Path] | None = None,
 ) -> None:
-    """send smtp mail.
+    """Send smtp mail.
 
     Args:
         receivers: receivers which the mail should be sent to.
@@ -53,4 +53,4 @@ def send_mail(
         log.info("email sent successfully")
     except Exception as exc:
         log.error(f"something went wrong. {exc=}")
-        raise exc
+        raise

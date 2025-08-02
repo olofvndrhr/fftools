@@ -13,7 +13,7 @@ TMPDIR = Path("tmp")
 
 
 @pytest.fixture(autouse=True, scope="module")
-def prepare_folders():
+def prepare_folders():  # noqa: ANN201
     TMPDIR.mkdir(parents=True, exist_ok=True)
     yield
     shutil.rmtree(TMPDIR)

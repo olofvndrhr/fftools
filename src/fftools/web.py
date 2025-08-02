@@ -18,7 +18,7 @@ def download_file(
     password: str | None = None,
     **kwargs,
 ) -> None:
-    """download a file with httpx.stream.
+    """Download a file with httpx.stream.
 
     Args:
         url: url of the file.
@@ -71,7 +71,7 @@ def download_file(
     except Exception as exc:
         log.error(f"can't save file={download_path}. {exc=}")
         download_path.unlink(missing_ok=True)
-        raise exc
+        raise
 
 
 def upload_file(
@@ -83,7 +83,7 @@ def upload_file(
     password: str | None = None,
     **kwargs,
 ) -> httpx.Response:
-    """upload a file with httpx.
+    """Upload a file with httpx.
 
     Args:
         method: http method to use for the upload.
@@ -124,7 +124,7 @@ def upload_file(
         )
     except Exception as exc:
         log.error(f"cant upload file={file_path} {exc=}")
-        raise exc
+        raise
 
     return response
 
@@ -140,7 +140,7 @@ def req(
     password: str | None = None,
     **kwargs,
 ) -> httpx.Response:
-    """make a http(s) request.
+    """Make a http(s) request.
 
     Args:
         method: HTTP method, e.g. GET.
@@ -198,13 +198,13 @@ def req(
         )
     except Exception as exc:
         log.error(f"error in {method} request. {exc=}")
-        raise exc
+        raise
 
     return response
 
 
 def dig(fqdn: str, record_type: str) -> list[str]:
-    """resolve dns record.
+    """Resolve dns record.
 
     Args:
         fqdn: fqdn of record to resolve.
@@ -233,7 +233,7 @@ def dig(fqdn: str, record_type: str) -> list[str]:
         resolved_records = [n.to_text() for n in answer.rrset]
     except Exception as exc:
         log.warning(f"error while resolving record(s). {exc=}")
-        raise exc
+        raise
 
     log.info(f"resolved record(s) {fqdn=}, {resolved_records=}")
     return resolved_records

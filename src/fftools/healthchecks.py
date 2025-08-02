@@ -15,7 +15,7 @@ class HealthChecks:
     """
 
     def __init__(self, url: str, path: str, ping_key: str | None = None) -> None:
-        """init the healthchecks api.
+        """Init the healthchecks api.
 
         Args:
             url: base url of the healthchecks instance.
@@ -51,12 +51,12 @@ class HealthChecks:
             result.raise_for_status()
         except Exception as exc:
             log.error(f"can't ping health-checks. exc={exc}")
-            raise exc
+            raise
 
         return result.status_code, result.text
 
     def success(self, message: str | None = None) -> tuple[int, str]:
-        """ping with status: success.
+        """Ping with status: success.
 
         used to end the job or signal success.
 
@@ -73,7 +73,7 @@ class HealthChecks:
         return status_code, status_text
 
     def start(self, message: str | None = None) -> tuple[int, str]:
-        """ping with status: start.
+        """Ping with status: start.
 
         starts the timer of the healthchecks job.
 
@@ -90,7 +90,7 @@ class HealthChecks:
         return status_code, status_text
 
     def fail(self, message: str | None = None) -> tuple[int, str]:
-        """ping with status: fail.
+        """Ping with status: fail.
 
         fails the current job.
 
@@ -107,7 +107,7 @@ class HealthChecks:
         return status_code, status_text
 
     def exit_code(self, exit_code: str | int, message: str | None = None) -> tuple[int, str]:
-        """ping with status: exit_code.
+        """Ping with status: exit_code.
 
         send the exit code of the program to healthchecks.
 
@@ -125,7 +125,7 @@ class HealthChecks:
         return status_code, status_text
 
     def log(self, message: str) -> tuple[int, str]:
-        """ping with status: log.
+        """Ping with status: log.
 
         sends a log to the current job. does not stop or fail the job.
 

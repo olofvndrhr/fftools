@@ -8,7 +8,7 @@ from loguru import logger as log
 
 
 def progress_bar(progress: float, total: float) -> None:
-    """prints a progress bar.
+    """Prints a progress bar.
 
     Args:
         progress: current progress to total. x/total.
@@ -30,7 +30,7 @@ def progress_bar(progress: float, total: float) -> None:
 
 
 def pop_dict(input_dict: dict[str, Any], keys: list[str]) -> dict[str, Any]:
-    """remove keys (and value for key) from `dict`.
+    """Remove keys (and value for key) from `dict`.
 
     does not modify the input dict. does nothing if the keys don't exist in the dict.
 
@@ -50,7 +50,7 @@ def pop_dict(input_dict: dict[str, Any], keys: list[str]) -> dict[str, Any]:
 
 
 def chunks(input_list: list[Any], output_length: int) -> Generator[list[Any], None, None]:
-    """get chunks of list -> list of lists.
+    """Get chunks of list -> list of lists.
 
     Args:
         input_list: the list to split into chunks.
@@ -64,7 +64,7 @@ def chunks(input_list: list[Any], output_length: int) -> Generator[list[Any], No
 
 
 def get_random_letters(count: int) -> str:
-    """get a string of random letters.
+    """Get a string of random letters.
 
     Args:
         count: count of random characters in the returned string.
@@ -79,12 +79,12 @@ def get_random_letters(count: int) -> str:
         log.error(f"'{count}' is not a valid integer")
         raise ValueError
 
-    random_letters = random.choices(string.ascii_letters, k=count)  # noqa
+    random_letters = random.choices(string.ascii_letters, k=count)  # noqa: S311
     return "".join(random_letters)
 
 
 def wait_random(max_seconds: int) -> None:
-    """wait random amount of seconds.
+    """Wait random amount of seconds.
 
     Args:
         max_seconds: max seconds to wait.
@@ -99,7 +99,7 @@ def wait_random(max_seconds: int) -> None:
 
 
 def fix_punycode(zone_name: str) -> str:
-    """fix punycode characters in domain name.
+    """Fix punycode characters in domain name.
 
     Args:
         zone_name: domain/zone name.
@@ -110,8 +110,8 @@ def fix_punycode(zone_name: str) -> str:
     return zone_name.encode("idna").decode("utf8")
 
 
-def check_null(item: str | bool | int | float) -> bool:
-    """check if an item is null/0/none.
+def check_null(item: str | bool | float) -> bool:
+    """Check if an item is null/0/none.
 
     Args:
         item: the item.
@@ -131,8 +131,7 @@ def check_null(item: str | bool | int | float) -> bool:
     if isinstance(item, str):
         if item.lower() in {"null", "nil", "none", "false", "0"}:
             return False
-        else:
-            return bool(item)
+        return bool(item)
 
     log.error(f"invalid null item {item=}")
     raise ValueError

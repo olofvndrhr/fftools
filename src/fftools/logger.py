@@ -11,8 +11,10 @@ from whenever import Instant, ZonedDateTime
 class Timestamp:
     """timestamp class for logging related strings."""
 
-    def __init__(self, timezone="Europe/Zurich", timestamp_format="%Y-%m-%dT%H:%M:%S") -> None:
-        """set timezone and format specific preferences.
+    def __init__(
+        self, timezone: str = "Europe/Zurich", timestamp_format: str = "%Y-%m-%dT%H:%M:%S"
+    ) -> None:
+        """Set timezone and format specific preferences.
 
         Args:
             timezone: timezone to use for timestamps.
@@ -56,21 +58,21 @@ class InterceptHandler(logging.Handler):
 
         # Find caller from where originated the logged message
         frame, depth = logging.currentframe(), 2
-        while frame.f_code.co_filename == logging.__file__:  # pyright:ignore
-            frame = frame.f_back  # type: ignore
+        while frame.f_code.co_filename == logging.__file__:  # pyright: ignore[reportOptionalMemberAccess]
+            frame = frame.f_back  # type: ignore  # noqa: PGH003
             depth += 1
 
         logger.opt(depth=depth, exception=record.exc_info).log(level, record.getMessage())
 
 
 def prepare_logger(loglevel: int = 20, logfile: Path | None = None) -> None:
-    """init logger with specified loglevel and logfile.
+    """Init logger with specified loglevel and logfile.
 
     Args:
         loglevel: level to set. 10 = debug, 20 = info, 30 = warning, etc.
         logfile: logfile to write log messages into.
     """
-    logfmt = "{time:%Y-%m-%dT%H:%M:%S%z} <level>[{level: <7}]</level> [{name: <10}] [{function: <20}]: {message}"
+    logfmt = "{time:%Y-%m-%dT%H:%M:%S%z} <level>[{level: <7}]</level> [{name: <10}] [{function: <20}]: {message}"  # noqa: E501
 
     stdout_handler: dict[str, Any] = {
         "sink": sys.stdout,

@@ -1,4 +1,4 @@
-import sys
+import sys  # noqa: INP001
 from pathlib import Path
 
 
@@ -10,7 +10,7 @@ from fftools.__about__ import __version__
 ### sphinx config ###
 
 project = "fftools"
-copyright = "2025-now, Ivan Schaller"  # noqa
+copyright = "2025-now, Ivan Schaller"  # noqa: A001
 author = "Ivan Schaller"
 release = __version__
 
@@ -57,7 +57,7 @@ intersphinx_mapping = {
 }
 
 
-### todo ###
+### other ###
 
 todo_include_todos = True
 
@@ -82,7 +82,6 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 ### theme ###
 
-# tml_theme = "alabaster"
 html_theme = "furo"
 html_theme_options = {
     "source_repository": "https://github.com/olofvndrhr/fftools/",
