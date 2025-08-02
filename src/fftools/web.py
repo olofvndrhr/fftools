@@ -163,9 +163,12 @@ def req(
         "accept": "application/json",
         "content-type": "application/json; charset=UTF-8",
     }
-    headers = kwargs.get("headers", {})
-    if default_headers:
+    headers = kwargs.get("headers", {}) or {}
+    if isinstance(headers, dict) and default_headers:
         headers.update(_default_headers)
+    if not isinstance(headers, dict):
+        log.warning("headers are invalid. using only default ones.")
+        headers = _default_headers
 
     # remove args from kwargs
     filtered_kwargs = pop_dict(
