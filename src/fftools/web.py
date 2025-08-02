@@ -98,7 +98,7 @@ def upload_file(
         exc: on upload errors.
 
     Returns:
-        `httpx.Response` object
+        response: `httpx.Response` object.
     """
     # remove args from kwargs
     filtered_kwargs = pop_dict(
@@ -157,7 +157,7 @@ def req(
         exc: on request errors.
 
     Returns:
-        `httpx.Response` object
+        response: `httpx.Response` object
     """
     _default_headers = {
         "accept": "application/json",
@@ -207,15 +207,15 @@ def dig(fqdn: str, record_type: str) -> list[str]:
     """resolve dns record.
 
     Args:
-        fqdn: fqdn of record to resolve
-        record_type: type of record, e.g. A or AAA
+        fqdn: fqdn of record to resolve.
+        record_type: type of record, e.g. A or AAA.
 
     Raises:
         ValueError: if no answer was found.
         exc: on resolving errors.
 
     Returns:
-        a list of resolved addresses
+        result: a list of resolved addresses.
     """
     record_type = record_type.upper()
 

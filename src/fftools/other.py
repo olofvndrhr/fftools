@@ -53,11 +53,11 @@ def chunks(input_list: list[Any], output_length: int) -> Generator[list[Any], No
     """get chunks of list -> list of lists.
 
     Args:
-        input_list: the list to split into chunks
-        output_length: length of the chunks
+        input_list: the list to split into chunks.
+        output_length: length of the chunks.
 
     Yields:
-        the chunked list of lists
+        the chunked list of lists.
     """
     for i in range(0, len(input_list), output_length):
         yield input_list[i : i + output_length]
@@ -87,7 +87,7 @@ def wait_random(max_seconds: int) -> None:
     """wait random amount of seconds.
 
     Args:
-        max_seconds: max seconds to wait
+        max_seconds: max seconds to wait.
     """
     if max_seconds <= 1:
         log.info("skipping wait")
@@ -102,10 +102,10 @@ def fix_punycode(zone_name: str) -> str:
     """fix punycode characters in domain name.
 
     Args:
-        zone_name: domain/zone name
+        zone_name: domain/zone name.
 
     Returns:
-        fixed domain/zone name
+        fixed domain/zone name.
     """
     return zone_name.encode("idna").decode("utf8")
 
@@ -114,7 +114,7 @@ def check_null(item: str | bool | int | float) -> bool:
     """check if an item is null/0/none.
 
     Args:
-        item: the item
+        item: the item.
 
     Raises:
         ValueError: if the item is not a `str`, `bool`, `int` or `float`.
