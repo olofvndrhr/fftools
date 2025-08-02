@@ -14,7 +14,9 @@ class HealthChecks:
     you can use <HOSTNAME> in the path for the formatted hostname of the device.
     """
 
-    def __init__(self, url: str, path: str, ping_key: str | None = None) -> None:
+    def __init__(
+        self, url: str, path: str, ping_key: str | None = None, user_agent: str | None = None
+    ) -> None:
         """Init the healthchecks api.
 
         Args:
@@ -22,14 +24,18 @@ class HealthChecks:
             path: ping path. full path if `ping_key` is not used,
                 else only the part after the `ping_key`.
             ping_key: ping key to use. Defaults to None.
+            user_agent: custom user-agent to set for requests.
         """
         self.hc_hostname = socket.gethostname().replace(".", "")
         self.host = url
         self.path = path.replace("<HOSTNAME>", self.hc_hostname)
         self.ping_key = ping_key
-        self.url = self._get_url()
+        self.user_agent = user_agent
 
-        log.debug(f"init healthchecks={self.url}")
+        self.url = self._get_url()
+        self.headers = {"User-Agent": self.user_agent} if self.user_agent else None
+
+        log.debug(f"init healthchecks={self.url}, user-agent={self.user_agent}")
 
     def _get_url(self) -> str:
         path = f"ping/{self.path}"
@@ -43,11 +49,11 @@ class HealthChecks:
         return f"{self.host}/{path}"
 
     @retry(stop=stop_after_attempt(3), wait=wait_fixed(3), reraise=True)
-    def _ping(self, path: str, message: str | None = None) -> tuple[int, str]:
+    def _ping(self, path: str, message: str | None) -> tuple[int, str]:
         ping_url = self.url + path
 
         try:
-            result = req("POST", ping_url, payload=message) if message else req("GET", ping_url)
+            result = req("POST", ping_url, payload=message, headers=self.headers)
             result.raise_for_status()
         except Exception as exc:
             log.error(f"can't ping health-checks. exc={exc}")
