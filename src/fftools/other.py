@@ -108,3 +108,31 @@ def fix_punycode(zone_name: str) -> str:
         fixed domain/zone name
     """
     return zone_name.encode("idna").decode("utf8")
+
+
+def check_null(item: str | bool | int | float) -> bool:
+    """check if an item is null/0/none.
+
+    Args:
+        item: the item
+
+    Raises:
+        ValueError: if the item is not a `str`, `bool`, `int` or `float`.
+
+    Returns:
+        result: if the value is considered null/0/none.
+    """
+    if isinstance(item, bool):
+        return item
+
+    if isinstance(item, int | float):
+        return bool(item)
+
+    if isinstance(item, str):
+        if item.lower() in {"null", "nil", "none", "false", "0"}:
+            return False
+        else:
+            return bool(item)
+
+    log.error(f"invalid null item {item=}")
+    raise ValueError
