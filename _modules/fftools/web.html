@@ -271,7 +271,7 @@
     <span class="n">password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;download a file with httpx.stream.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Download a file with httpx.stream.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        url: url of the file.</span>
@@ -324,7 +324,7 @@
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
         <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;can&#39;t save file=</span><span class="si">{</span><span class="n">download_path</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">exc</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">download_path</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">missing_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="n">exc</span></div>
+        <span class="k">raise</span></div>
 
 
 
@@ -339,7 +339,7 @@
     <span class="n">password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Response</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;upload a file with httpx.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Upload a file with httpx.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        method: http method to use for the upload.</span>
@@ -354,7 +354,7 @@
 <span class="sd">        exc: on upload errors.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        `httpx.Response` object</span>
+<span class="sd">        response: `httpx.Response` object.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># remove args from kwargs</span>
     <span class="n">filtered_kwargs</span> <span class="o">=</span> <span class="n">pop_dict</span><span class="p">(</span>
@@ -380,7 +380,7 @@
         <span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
         <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;cant upload file=</span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">exc</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="n">exc</span>
+        <span class="k">raise</span>
 
     <span class="k">return</span> <span class="n">response</span></div>
 
@@ -399,7 +399,7 @@
     <span class="n">password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Response</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;make a http(s) request.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a http(s) request.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        method: HTTP method, e.g. GET.</span>
@@ -416,7 +416,7 @@
 <span class="sd">        exc: on request errors.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        `httpx.Response` object</span>
+<span class="sd">        response: `httpx.Response` object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_default_headers</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;accept&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
@@ -457,7 +457,7 @@
         <span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
         <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;error in </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2"> request. </span><span class="si">{</span><span class="n">exc</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="n">exc</span>
+        <span class="k">raise</span>
 
     <span class="k">return</span> <span class="n">response</span></div>
 
@@ -466,18 +466,18 @@
 <div class="viewcode-block" id="dig">
 <a class="viewcode-back" href="../../modules/fftools.web.html#fftools.web.dig">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">dig</span><span class="p">(</span><span class="n">fqdn</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">record_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;resolve dns record.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolve dns record.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        fqdn: fqdn of record to resolve</span>
-<span class="sd">        record_type: type of record, e.g. A or AAA</span>
+<span class="sd">        fqdn: fqdn of record to resolve.</span>
+<span class="sd">        record_type: type of record, e.g. A or AAA.</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ValueError: if no answer was found.</span>
 <span class="sd">        exc: on resolving errors.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        a list of resolved addresses</span>
+<span class="sd">        result: a list of resolved addresses.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">record_type</span> <span class="o">=</span> <span class="n">record_type</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
 
@@ -495,7 +495,7 @@
         <span class="n">resolved_records</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="o">.</span><span class="n">to_text</span><span class="p">()</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">answer</span><span class="o">.</span><span class="n">rrset</span><span class="p">]</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
         <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;error while resolving record(s). </span><span class="si">{</span><span class="n">exc</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="n">exc</span>
+        <span class="k">raise</span>
 
     <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;resolved record(s) </span><span class="si">{</span><span class="n">fqdn</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">resolved_records</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">resolved_records</span></div>

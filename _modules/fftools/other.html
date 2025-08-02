@@ -261,7 +261,7 @@
 <div class="viewcode-block" id="progress_bar">
 <a class="viewcode-back" href="../../modules/fftools.other.html#fftools.other.progress_bar">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">progress_bar</span><span class="p">(</span><span class="n">progress</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;prints a progress bar.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Prints a progress bar.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        progress: current progress to total. x/total.</span>
@@ -286,7 +286,7 @@
 <div class="viewcode-block" id="pop_dict">
 <a class="viewcode-back" href="../../modules/fftools.other.html#fftools.other.pop_dict">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">pop_dict</span><span class="p">(</span><span class="n">input_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">keys</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;remove keys (and value for key) from `dict`.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove keys (and value for key) from `dict`.</span>
 
 <span class="sd">    does not modify the input dict. does nothing if the keys don&#39;t exist in the dict.</span>
 
@@ -309,14 +309,14 @@
 <div class="viewcode-block" id="chunks">
 <a class="viewcode-back" href="../../modules/fftools.other.html#fftools.other.chunks">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">chunks</span><span class="p">(</span><span class="n">input_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">output_length</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;get chunks of list -&gt; list of lists.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get chunks of list -&gt; list of lists.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        input_list: the list to split into chunks</span>
-<span class="sd">        output_length: length of the chunks</span>
+<span class="sd">        input_list: the list to split into chunks.</span>
+<span class="sd">        output_length: length of the chunks.</span>
 
 <span class="sd">    Yields:</span>
-<span class="sd">        the chunked list of lists</span>
+<span class="sd">        the chunked list of lists.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_list</span><span class="p">),</span> <span class="n">output_length</span><span class="p">):</span>
         <span class="k">yield</span> <span class="n">input_list</span><span class="p">[</span><span class="n">i</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="n">output_length</span><span class="p">]</span></div>
@@ -326,7 +326,7 @@
 <div class="viewcode-block" id="get_random_letters">
 <a class="viewcode-back" href="../../modules/fftools.other.html#fftools.other.get_random_letters">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_random_letters</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;get a string of random letters.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get a string of random letters.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        count: count of random characters in the returned string.</span>
@@ -341,7 +341,7 @@
         <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2">&#39; is not a valid integer&quot;</span><span class="p">)</span>
         <span class="k">raise</span> <span class="ne">ValueError</span>
 
-    <span class="n">random_letters</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">count</span><span class="p">)</span>  <span class="c1"># noqa</span>
+    <span class="n">random_letters</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">count</span><span class="p">)</span>  <span class="c1"># noqa: S311</span>
     <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random_letters</span><span class="p">)</span></div>
 
 
@@ -349,10 +349,10 @@
 <div class="viewcode-block" id="wait_random">
 <a class="viewcode-back" href="../../modules/fftools.other.html#fftools.other.wait_random">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">wait_random</span><span class="p">(</span><span class="n">max_seconds</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;wait random amount of seconds.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wait random amount of seconds.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        max_seconds: max seconds to wait</span>
+<span class="sd">        max_seconds: max seconds to wait.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">max_seconds</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;skipping wait&quot;</span><span class="p">)</span>
@@ -367,15 +367,45 @@
 <div class="viewcode-block" id="fix_punycode">
 <a class="viewcode-back" href="../../modules/fftools.other.html#fftools.other.fix_punycode">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">fix_punycode</span><span class="p">(</span><span class="n">zone_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;fix punycode characters in domain name.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fix punycode characters in domain name.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        zone_name: domain/zone name</span>
+<span class="sd">        zone_name: domain/zone name.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        fixed domain/zone name</span>
+<span class="sd">        fixed domain/zone name.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">zone_name</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;idna&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf8&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="check_null">
+<a class="viewcode-back" href="../../modules/fftools.other.html#fftools.other.check_null">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_null</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bool</span> <span class="o">|</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if an item is null/0/none.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        item: the item.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: if the item is not a `str`, `bool`, `int` or `float`.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        result: if the value is considered null/0/none.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">item</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;null&quot;</span><span class="p">,</span> <span class="s2">&quot;nil&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">}:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+    <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;invalid null item </span><span class="si">{</span><span class="n">item</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span></div>
 
 </pre></div>
         </article>

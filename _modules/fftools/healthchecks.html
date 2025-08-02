@@ -270,7 +270,7 @@
 <div class="viewcode-block" id="HealthChecks.__init__">
 <a class="viewcode-back" href="../../modules/fftools.healthchecks.html#fftools.healthchecks.HealthChecks.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ping_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;init the healthchecks api.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Init the healthchecks api.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            url: base url of the healthchecks instance.</span>
@@ -307,14 +307,14 @@
             <span class="n">result</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;can&#39;t ping health-checks. exc=</span><span class="si">{</span><span class="n">exc</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="n">exc</span>
+            <span class="k">raise</span>
 
         <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">text</span>
 
 <div class="viewcode-block" id="HealthChecks.success">
 <a class="viewcode-back" href="../../modules/fftools.healthchecks.html#fftools.healthchecks.HealthChecks.success">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;ping with status: success.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Ping with status: success.</span>
 
 <span class="sd">        used to end the job or signal success.</span>
 
@@ -334,7 +334,7 @@
 <div class="viewcode-block" id="HealthChecks.start">
 <a class="viewcode-back" href="../../modules/fftools.healthchecks.html#fftools.healthchecks.HealthChecks.start">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;ping with status: start.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Ping with status: start.</span>
 
 <span class="sd">        starts the timer of the healthchecks job.</span>
 
@@ -354,7 +354,7 @@
 <div class="viewcode-block" id="HealthChecks.fail">
 <a class="viewcode-back" href="../../modules/fftools.healthchecks.html#fftools.healthchecks.HealthChecks.fail">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">fail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;ping with status: fail.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Ping with status: fail.</span>
 
 <span class="sd">        fails the current job.</span>
 
@@ -374,7 +374,7 @@
 <div class="viewcode-block" id="HealthChecks.exit_code">
 <a class="viewcode-back" href="../../modules/fftools.healthchecks.html#fftools.healthchecks.HealthChecks.exit_code">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">exit_code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exit_code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;ping with status: exit_code.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Ping with status: exit_code.</span>
 
 <span class="sd">        send the exit code of the program to healthchecks.</span>
 
@@ -395,7 +395,7 @@
 <div class="viewcode-block" id="HealthChecks.log">
 <a class="viewcode-back" href="../../modules/fftools.healthchecks.html#fftools.healthchecks.HealthChecks.log">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;ping with status: log.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Ping with status: log.</span>
 
 <span class="sd">        sends a log to the current job. does not stop or fail the job.</span>
 

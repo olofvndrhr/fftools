@@ -271,7 +271,7 @@
     <span class="n">check_ecode</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;run local shell command.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run local shell command.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        command: command to run.</span>
@@ -280,18 +280,18 @@
 <span class="sd">        kwargs: other kwargs directly supplied to `subprocess.run`</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: if command is not either a `str`, `list`, `tuple` or `set`.</span>
+<span class="sd">        TypeError: if command is not either a `str`, `list`, `tuple` or `set`.</span>
 <span class="sd">        exc: if `check_ecode` is `True` and the exit code is not 0.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        tuple of (exit code, stdout, stderr).</span>
+<span class="sd">        result: tuple of (exit code, stdout, stderr).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">cmd</span> <span class="o">=</span> <span class="n">command</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span> <span class="o">|</span> <span class="nb">set</span><span class="p">):</span>
         <span class="n">cmd</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span>
 
     <span class="c1"># remove args from kwargs</span>
     <span class="n">filtered_kwargs</span> <span class="o">=</span> <span class="n">pop_dict</span><span class="p">(</span>
@@ -316,7 +316,7 @@
         <span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
         <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;can&#39;t run </span><span class="si">{</span><span class="n">command</span><span class="si">=}</span><span class="s2">. </span><span class="si">{</span><span class="n">exc</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="n">exc</span>
+        <span class="k">raise</span>
 
     <span class="n">stdout</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
     <span class="n">stderr</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
@@ -338,7 +338,7 @@
     <span class="n">password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;run command on remote machine via ssh.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run command on remote machine via ssh.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        command: command to run.</span>
@@ -351,18 +351,18 @@
 <span class="sd">        kwargs: other kwargs directly supplied to `fabric.Connection.run`</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: if command is not either a `str`, `list`, `tuple` or `set`.</span>
+<span class="sd">        TypeError: if command is not either a `str`, `list`, `tuple` or `set`.</span>
 <span class="sd">        exc: if `check_ecode` is `True` and the exit code is not 0.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        tuple of (exit code, stdout, stderr)</span>
+<span class="sd">        result: tuple of (exit code, stdout, stderr).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">cmd</span> <span class="o">=</span> <span class="n">command</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span> <span class="o">|</span> <span class="nb">set</span><span class="p">):</span>
         <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span>
 
     <span class="c1"># remove args from kwargs</span>
     <span class="n">filtered_kwargs</span> <span class="o">=</span> <span class="n">pop_dict</span><span class="p">(</span>
@@ -396,7 +396,7 @@
             <span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
         <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;can&#39;t run ssh </span><span class="si">{</span><span class="n">command</span><span class="si">=}</span><span class="s2">. </span><span class="si">{</span><span class="n">exc</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="n">exc</span>
+        <span class="k">raise</span>
 
     <span class="n">stdout</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
     <span class="n">stderr</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
@@ -409,7 +409,7 @@
 <div class="viewcode-block" id="extract_archive">
 <a class="viewcode-back" href="../../modules/fftools.shell.html#fftools.shell.extract_archive">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">extract_archive</span><span class="p">(</span><span class="n">archive</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;extract an archive file.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract an archive file.</span>
 
 <span class="sd">    supportet are: tar, zip, gzip, bzip2 and xz.</span>
 
@@ -444,7 +444,7 @@
 <div class="viewcode-block" id="extract_file">
 <a class="viewcode-back" href="../../modules/fftools.shell.html#fftools.shell.extract_file">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">extract_file</span><span class="p">(</span><span class="n">atype</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;gzip&quot;</span><span class="p">,</span> <span class="s2">&quot;bzip&quot;</span><span class="p">,</span> <span class="s2">&quot;xz&quot;</span><span class="p">],</span> <span class="n">infile</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;extract file.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract file.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        atype: archive type.</span>
