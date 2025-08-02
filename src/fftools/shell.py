@@ -31,7 +31,7 @@ def run_command(
         exc: if `check_ecode` is `True` and the exit code is not 0.
 
     Returns:
-        result: tuple of (exit code, stdout, stderr).
+        A tuple of (exit code, stdout, stderr).
     """
     if isinstance(command, str):
         cmd = command.split()
@@ -99,7 +99,7 @@ def run_ssh_command(
         exc: if `check_ecode` is `True` and the exit code is not 0.
 
     Returns:
-        result: tuple of (exit code, stdout, stderr).
+        A tuple of (exit code, stdout, stderr).
     """
     if isinstance(command, str):
         cmd = command

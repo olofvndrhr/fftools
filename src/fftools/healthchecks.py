@@ -64,7 +64,7 @@ class HealthChecks:
             message: message to add to ping body. Defaults to None.
 
         Returns:
-            response: tuple with (http response code, http response body).
+            A tuple with (http response code, http response body).
         """
         log.info("health-checks: success...")
         status_path = ""
@@ -81,7 +81,7 @@ class HealthChecks:
             message: message to add to ping body. Defaults to None.
 
         Returns:
-            response: tuple with (http response code, http response body).
+            A tuple with (http response code, http response body).
         """
         log.info("health-checks: start...")
         status_path = "/start"
@@ -98,7 +98,7 @@ class HealthChecks:
             message: message to add to ping body. Defaults to None.
 
         Returns:
-            response: tuple with (http response code, http response body).
+            A tuple with (http response code, http response body).
         """
         log.info("health-checks: fail...")
         status_path = "/fail"
@@ -116,7 +116,7 @@ class HealthChecks:
             message: message to add to ping body. Defaults to None.
 
         Returns:
-            response: tuple with (http response code, http response body).
+            A tuple with (http response code, http response body).
         """
         log.info(f"health-checks: exit code={exit_code}...")
         status_path = f"/{exit_code}"
@@ -133,7 +133,7 @@ class HealthChecks:
             message: message to add to ping body.
 
         Returns:
-            response: tuple with (http response code, http response body).
+            A tuple with (http response code, http response body).
         """
         log.info("health-checks: log...")
         status_path = "/log"

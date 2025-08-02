@@ -39,7 +39,7 @@ def pop_dict(input_dict: dict[str, Any], keys: list[str]) -> dict[str, Any]:
         keys: list of keys to remove.
 
     Returns:
-        the new dict without the specified keys.
+        The new dict without the specified keys.
     """
     log.debug(f"cleaning dict keys={keys}")
     output_dict = input_dict.copy()
@@ -73,7 +73,7 @@ def get_random_letters(count: int) -> str:
         ValueError: if count is smaller than 1.
 
     Returns:
-        the string of random letters.
+        The string of random letters.
     """
     if count <= 1:
         log.error(f"'{count}' is not a valid integer")
@@ -105,7 +105,7 @@ def fix_punycode(zone_name: str) -> str:
         zone_name: domain/zone name.
 
     Returns:
-        fixed domain/zone name.
+        The fixed domain/zone name.
     """
     return zone_name.encode("idna").decode("utf8")
 
@@ -120,7 +120,7 @@ def check_null(item: str | bool | float) -> bool:
         ValueError: if the item is not a `str`, `bool`, `int` or `float`.
 
     Returns:
-        result: if the value is considered null/0/none.
+        If the value is considered null/0/none.
     """
     if isinstance(item, bool):
         return item
