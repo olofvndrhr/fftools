@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
-        <title>fftools.healthchecks - fftools 2.0.3 documentation</title>
+        <title>fftools.healthchecks - fftools 2.0.4 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=25af2a20" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -166,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">fftools 2.0.3 documentation</div></a>
+      <a href="../../index.html"><div class="brand">fftools 2.0.4 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -189,7 +189,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
-  <span class="sidebar-brand-text">fftools 2.0.3 documentation</span>
+  <span class="sidebar-brand-text">fftools 2.0.4 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -322,7 +322,7 @@
 <span class="sd">            message: message to add to ping body. Defaults to None.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response: tuple with (http response code, http response body).</span>
+<span class="sd">            A tuple with (http response code, http response body).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;health-checks: success...&quot;</span><span class="p">)</span>
         <span class="n">status_path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
@@ -342,7 +342,7 @@
 <span class="sd">            message: message to add to ping body. Defaults to None.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response: tuple with (http response code, http response body).</span>
+<span class="sd">            A tuple with (http response code, http response body).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;health-checks: start...&quot;</span><span class="p">)</span>
         <span class="n">status_path</span> <span class="o">=</span> <span class="s2">&quot;/start&quot;</span>
@@ -362,7 +362,7 @@
 <span class="sd">            message: message to add to ping body. Defaults to None.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response: tuple with (http response code, http response body).</span>
+<span class="sd">            A tuple with (http response code, http response body).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;health-checks: fail...&quot;</span><span class="p">)</span>
         <span class="n">status_path</span> <span class="o">=</span> <span class="s2">&quot;/fail&quot;</span>
@@ -383,7 +383,7 @@
 <span class="sd">            message: message to add to ping body. Defaults to None.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response: tuple with (http response code, http response body).</span>
+<span class="sd">            A tuple with (http response code, http response body).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;health-checks: exit code=</span><span class="si">{</span><span class="n">exit_code</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
         <span class="n">status_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">exit_code</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -403,7 +403,7 @@
 <span class="sd">            message: message to add to ping body.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response: tuple with (http response code, http response body).</span>
+<span class="sd">            A tuple with (http response code, http response body).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;health-checks: log...&quot;</span><span class="p">)</span>
         <span class="n">status_path</span> <span class="o">=</span> <span class="s2">&quot;/log&quot;</span>
@@ -444,7 +444,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=664ffad9"></script>
+</div><script src="../../_static/documentation_options.js?v=adc66a14"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
