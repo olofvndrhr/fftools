@@ -119,6 +119,7 @@ src               = ["src", "tests"]
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
+    "ANN002",
     "ANN003",
     "ANN401",
     "BLE001",
@@ -128,6 +129,8 @@ ignore = [
     "D103",
     "EM101",
     "FBT",
+    "G004",
+    "SLF001",
     "TRY003",
     "TRY301",
 ]
@@ -145,9 +148,11 @@ docstring-code-format     = true
 "__init__.py" = ["D104"]
 "__about__.py" = ["D104", "F841"]
 "tests/**/*" = [
+    "E501",
     "PLR2004",
     "S101",
     "TID252",
+    "PGH003",
 ]
 "src/fftools/shell.py" = ["S603"]
 
