@@ -278,7 +278,7 @@
 <span class="sd">            url: base url of the healthchecks instance.</span>
 <span class="sd">            path: ping path. full path if `ping_key` is not used,</span>
 <span class="sd">                else only the part after the `ping_key`.</span>
-<span class="sd">            ping_key: ping key to use. Defaults to None.</span>
+<span class="sd">            ping_key: ping key to use.</span>
 <span class="sd">            user_agent: custom user-agent to set for requests.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hc_hostname</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostname</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -325,7 +325,7 @@
 <span class="sd">        used to end the job or signal success.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            message: message to add to ping body. Defaults to None.</span>
+<span class="sd">            message: message to add to ping body.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A tuple with (http response code, http response body).</span>
@@ -345,7 +345,7 @@
 <span class="sd">        starts the timer of the healthchecks job.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            message: message to add to ping body. Defaults to None.</span>
+<span class="sd">            message: message to add to ping body.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A tuple with (http response code, http response body).</span>
@@ -365,7 +365,7 @@
 <span class="sd">        fails the current job.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            message: message to add to ping body. Defaults to None.</span>
+<span class="sd">            message: message to add to ping body.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A tuple with (http response code, http response body).</span>
@@ -386,7 +386,7 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            exit_code: exit code to report.</span>
-<span class="sd">            message: message to add to ping body. Defaults to None.</span>
+<span class="sd">            message: message to add to ping body.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A tuple with (http response code, http response body).</span>

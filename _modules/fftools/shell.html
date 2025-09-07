@@ -275,8 +275,8 @@
 
 <span class="sd">    Args:</span>
 <span class="sd">        command: command to run.</span>
-<span class="sd">        timeout: timeout in seconds. Defaults to 10.</span>
-<span class="sd">        check_ecode: if exception should be raised on non-zero exit codes. Defaults to True.</span>
+<span class="sd">        timeout: timeout in seconds.</span>
+<span class="sd">        check_ecode: if exception should be raised on non-zero exit codes.</span>
 <span class="sd">        kwargs: other kwargs directly supplied to `subprocess.run`</span>
 
 <span class="sd">    Raises:</span>
@@ -343,11 +343,11 @@
 <span class="sd">    Args:</span>
 <span class="sd">        command: command to run.</span>
 <span class="sd">        hostname: hostname of remote device.</span>
-<span class="sd">        username: ssh username. Defaults to &quot;root&quot;.</span>
-<span class="sd">        port: ssh port. Defaults to 22.</span>
-<span class="sd">        timeout: command timeout. Defaults to 10.</span>
-<span class="sd">        check_ecode: if exception should be raised on non-zero exit codes. Defaults to True.</span>
-<span class="sd">        password: ssh user password if not authenticated via ssh keys. Defaults to None.</span>
+<span class="sd">        username: ssh username.</span>
+<span class="sd">        port: ssh port.</span>
+<span class="sd">        timeout: command timeout.</span>
+<span class="sd">        check_ecode: if exception should be raised on non-zero exit codes.</span>
+<span class="sd">        password: ssh user password if not authenticated via ssh keys.</span>
 <span class="sd">        kwargs: other kwargs directly supplied to `fabric.Connection.run`</span>
 
 <span class="sd">    Raises:</span>

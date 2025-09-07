@@ -276,12 +276,11 @@
 <span class="sd">    Args:</span>
 <span class="sd">        url: url of the file.</span>
 <span class="sd">        download_path: ath to save the file to.</span>
-<span class="sd">        timeout: timeout of the request in seconds. Defaults to 30.</span>
+<span class="sd">        timeout: timeout of the request in seconds.</span>
 <span class="sd">        follow_redirects: follow HTTP 3XX redirects. `None` sets it to the server response default.</span>
-<span class="sd">            Defaults to True.</span>
-<span class="sd">        chunk_size: size of the chunks which are downloaded. Defaults to 64*1024.</span>
-<span class="sd">        username: username for basic auth. if unset no authentication is used. Defaults to None.</span>
-<span class="sd">        password: password for basic auth. if unset no authentication is used. Defaults to None.</span>
+<span class="sd">        chunk_size: size of the chunks which are downloaded.</span>
+<span class="sd">        username: username for basic auth. if unset no authentication is used.</span>
+<span class="sd">        password: password for basic auth. if unset no authentication is used.</span>
 <span class="sd">        kwargs: other kwargs directly supplied to `httpx.request`</span>
 
 <span class="sd">    Raises:</span>
@@ -345,9 +344,9 @@
 <span class="sd">        method: http method to use for the upload.</span>
 <span class="sd">        url: upload url.</span>
 <span class="sd">        file_path: path of file to upload.</span>
-<span class="sd">        timeout: timeout of the request in seconds. Defaults to 30.</span>
-<span class="sd">        username: username for basic auth. if unset no authentication is used. Defaults to None.</span>
-<span class="sd">        password: password for basic auth. if unset no authentication is used. Defaults to None.</span>
+<span class="sd">        timeout: timeout of the request in seconds.</span>
+<span class="sd">        username: username for basic auth. if unset no authentication is used.</span>
+<span class="sd">        password: password for basic auth. if unset no authentication is used.</span>
 <span class="sd">        kwargs: other kwargs directly supplied to `httpx.request`</span>
 
 <span class="sd">    Raises:</span>
@@ -404,12 +403,12 @@
 <span class="sd">    Args:</span>
 <span class="sd">        method: HTTP method, e.g. GET.</span>
 <span class="sd">        url: url for the request.</span>
-<span class="sd">        timeout: timeout of the request in seconds. Defaults to 5.</span>
-<span class="sd">        default_headers: send default headers for `content-type` and `accept`. Defaults to True.</span>
-<span class="sd">        follow_redirects: follow HTTP 3XX redirects. Defaults to True.</span>
-<span class="sd">        payload: data to send. either `dict`, `str` or `bytes`. Defaults to None.</span>
-<span class="sd">        username: username for basic auth. if unset no authentication is used. Defaults to None.</span>
-<span class="sd">        password: password for basic auth. if unset no authentication is used. Defaults to None.</span>
+<span class="sd">        timeout: timeout of the request in seconds.</span>
+<span class="sd">        default_headers: send default headers for `content-type` and `accept`.</span>
+<span class="sd">        follow_redirects: follow HTTP 3XX redirects.</span>
+<span class="sd">        payload: data to send. either `dict`, `str` or `bytes`.</span>
+<span class="sd">        username: username for basic auth. if unset no authentication is used.</span>
+<span class="sd">        password: password for basic auth. if unset no authentication is used.</span>
 <span class="sd">        kwargs: other kwargs directly supplied to `httpx.request`</span>
 
 <span class="sd">    Raises:</span>
