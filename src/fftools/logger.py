@@ -35,7 +35,7 @@ class Timestamp:
 
     @property
     def now_crossplatform(self) -> str:
-        return re.sub(r'"|:|<|>|/|\\|\||\?|\*', "_", self.now)
+        return re.sub(r'[":<>\\/\|\?\*]', "_", self.now)
 
     @property
     def ts_ymd(self) -> str:
