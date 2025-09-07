@@ -26,9 +26,9 @@ def send_mail(
         smtp_sender: sender mail address.
         smtp_password: password of the mail sender.
         smtp_server: smtp server to connect to.
-        smtp_port: smtp port to connect to. Defaults to 465.
-        smtp_tls: if TLS/SSL should be used. False means StartTLS will be used. Defaults to True.
-        attachments: any file attachments to add. Defaults to None.
+        smtp_port: smtp port to connect to.
+        smtp_tls: if TLS/SSL should be used. False means StartTLS will be used.
+        attachments: any file attachments to add.
 
     Raises:
         exc: if mail could not be sent.

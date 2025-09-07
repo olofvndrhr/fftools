@@ -22,8 +22,8 @@ def run_command(
 
     Args:
         command: command to run.
-        timeout: timeout in seconds. Defaults to 10.
-        check_ecode: if exception should be raised on non-zero exit codes. Defaults to True.
+        timeout: timeout in seconds.
+        check_ecode: if exception should be raised on non-zero exit codes.
         kwargs: other kwargs directly supplied to `subprocess.run`
 
     Raises:
@@ -87,11 +87,11 @@ def run_ssh_command(
     Args:
         command: command to run.
         hostname: hostname of remote device.
-        username: ssh username. Defaults to "root".
-        port: ssh port. Defaults to 22.
-        timeout: command timeout. Defaults to 10.
-        check_ecode: if exception should be raised on non-zero exit codes. Defaults to True.
-        password: ssh user password if not authenticated via ssh keys. Defaults to None.
+        username: ssh username.
+        port: ssh port.
+        timeout: command timeout.
+        check_ecode: if exception should be raised on non-zero exit codes.
+        password: ssh user password if not authenticated via ssh keys.
         kwargs: other kwargs directly supplied to `fabric.Connection.run`
 
     Raises:

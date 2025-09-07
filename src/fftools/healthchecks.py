@@ -23,7 +23,7 @@ class HealthChecks:
             url: base url of the healthchecks instance.
             path: ping path. full path if `ping_key` is not used,
                 else only the part after the `ping_key`.
-            ping_key: ping key to use. Defaults to None.
+            ping_key: ping key to use.
             user_agent: custom user-agent to set for requests.
         """
         self.hc_hostname = socket.gethostname().replace(".", "")
@@ -67,7 +67,7 @@ class HealthChecks:
         used to end the job or signal success.
 
         Args:
-            message: message to add to ping body. Defaults to None.
+            message: message to add to ping body.
 
         Returns:
             A tuple with (http response code, http response body).
@@ -84,7 +84,7 @@ class HealthChecks:
         starts the timer of the healthchecks job.
 
         Args:
-            message: message to add to ping body. Defaults to None.
+            message: message to add to ping body.
 
         Returns:
             A tuple with (http response code, http response body).
@@ -101,7 +101,7 @@ class HealthChecks:
         fails the current job.
 
         Args:
-            message: message to add to ping body. Defaults to None.
+            message: message to add to ping body.
 
         Returns:
             A tuple with (http response code, http response body).
@@ -119,7 +119,7 @@ class HealthChecks:
 
         Args:
             exit_code: exit code to report.
-            message: message to add to ping body. Defaults to None.
+            message: message to add to ping body.
 
         Returns:
             A tuple with (http response code, http response body).

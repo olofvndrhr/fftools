@@ -23,12 +23,11 @@ def download_file(
     Args:
         url: url of the file.
         download_path: ath to save the file to.
-        timeout: timeout of the request in seconds. Defaults to 30.
+        timeout: timeout of the request in seconds.
         follow_redirects: follow HTTP 3XX redirects. `None` sets it to the server response default.
-            Defaults to True.
-        chunk_size: size of the chunks which are downloaded. Defaults to 64*1024.
-        username: username for basic auth. if unset no authentication is used. Defaults to None.
-        password: password for basic auth. if unset no authentication is used. Defaults to None.
+        chunk_size: size of the chunks which are downloaded.
+        username: username for basic auth. if unset no authentication is used.
+        password: password for basic auth. if unset no authentication is used.
         kwargs: other kwargs directly supplied to `httpx.request`
 
     Raises:
@@ -89,9 +88,9 @@ def upload_file(
         method: http method to use for the upload.
         url: upload url.
         file_path: path of file to upload.
-        timeout: timeout of the request in seconds. Defaults to 30.
-        username: username for basic auth. if unset no authentication is used. Defaults to None.
-        password: password for basic auth. if unset no authentication is used. Defaults to None.
+        timeout: timeout of the request in seconds.
+        username: username for basic auth. if unset no authentication is used.
+        password: password for basic auth. if unset no authentication is used.
         kwargs: other kwargs directly supplied to `httpx.request`
 
     Raises:
@@ -145,12 +144,12 @@ def req(
     Args:
         method: HTTP method, e.g. GET.
         url: url for the request.
-        timeout: timeout of the request in seconds. Defaults to 5.
-        default_headers: send default headers for `content-type` and `accept`. Defaults to True.
-        follow_redirects: follow HTTP 3XX redirects. Defaults to True.
-        payload: data to send. either `dict`, `str` or `bytes`. Defaults to None.
-        username: username for basic auth. if unset no authentication is used. Defaults to None.
-        password: password for basic auth. if unset no authentication is used. Defaults to None.
+        timeout: timeout of the request in seconds.
+        default_headers: send default headers for `content-type` and `accept`.
+        follow_redirects: follow HTTP 3XX redirects.
+        payload: data to send. either `dict`, `str` or `bytes`.
+        username: username for basic auth. if unset no authentication is used.
+        password: password for basic auth. if unset no authentication is used.
         kwargs: other kwargs directly supplied to `httpx.request`
 
     Raises:

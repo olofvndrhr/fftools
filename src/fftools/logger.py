@@ -18,9 +18,8 @@ class Timestamp:
 
         Args:
             timezone: timezone to use for timestamps.
-                Defaults to "Europe/Zurich".
             timestamp_format: `strftime` format string to use for timestamps.
-                Defaults to "%Y-%m-%dT%H:%M:%S".
+
         """
         self.timezone = timezone
         self.timestamp_format = timestamp_format
