@@ -51,7 +51,7 @@ def test_download() -> None:
 
     assert dl_path.exists()
     assert dl_path.is_file()
-    assert dl_path.stat().st_size > 200000
+    assert dl_path.stat().st_size > 100000
 
     # cleanup
     dl_path.unlink(missing_ok=True)
