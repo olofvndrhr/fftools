@@ -52,8 +52,8 @@ packages = ["src/fftools"]
 [tool.hatch.envs.test]
 python = "3.12"
 dependencies = [
-    "pytest==8.4.2",
-    "coverage==7.11.0",
+    "pytest==9.0.2",
+    "coverage==7.13.1",
 ]
 
 [tool.hatch.envs.test.scripts]
@@ -73,9 +73,9 @@ cov = ["test-cov", "cov-report"]
 python = "3.12"
 detached = true
 dependencies = [
-    "mypy==1.18.2",
-    "ruff==0.14.1",
-    "pydantic~=2.12.3",
+    "mypy==1.19.1",
+    "ruff==0.14.10",
+    "pydantic~=2.12.5",
 ]
 
 [tool.hatch.envs.lint.scripts]
