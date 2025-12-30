@@ -69,7 +69,7 @@ def test_extract_file() -> None:
 
 def test_run_command_str() -> None:
     command = "echo hello"
-    ecode, stdout, stderr = run_command(command)
+    _ecode, stdout, stderr = run_command(command)
 
     assert stdout == "hello"
     assert stderr == ""
@@ -77,7 +77,7 @@ def test_run_command_str() -> None:
 
 def test_run_command_invalid_arg() -> None:
     command = "echo hello"
-    ecode, stdout, stderr = run_command(command, check=False, capture_output=False)
+    _ecode, stdout, stderr = run_command(command, check=False, capture_output=False)
 
     assert stdout == "hello"
     assert stderr == ""
@@ -85,7 +85,7 @@ def test_run_command_invalid_arg() -> None:
 
 def test_run_command_list() -> None:
     command = ["echo", "hello"]
-    ecode, stdout, stderr = run_command(command)
+    _ecode, stdout, stderr = run_command(command)
 
     assert stdout == "hello"
     assert stderr == ""
@@ -93,7 +93,7 @@ def test_run_command_list() -> None:
 
 def test_run_command_tuple() -> None:
     command = ("echo", "hello")
-    ecode, stdout, stderr = run_command(command)
+    _ecode, stdout, stderr = run_command(command)
 
     assert stdout == "hello"
     assert stderr == ""
