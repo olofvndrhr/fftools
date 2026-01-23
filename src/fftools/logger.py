@@ -64,24 +64,29 @@ class InterceptHandler(logging.Handler):
         logger.opt(depth=depth, exception=record.exc_info).log(level, record.getMessage())
 
 
-def prepare_logger(loglevel: int = 20, logfile: Path | None = None) -> None:
+def prepare_logger(
+    loglevel: int = 20,
+    logfile: Path | None = None,
+    logfmt: str = "<level>{time:YYYY-MM-DD HH:mm:ss zz} [{level}]</> <c>[{name}]</> {message}",
+) -> None:
     """Init logger with specified loglevel and logfile.
 
     Args:
         loglevel: level to set. 10 = debug, 20 = info, 30 = warning, etc.
         logfile: logfile to write log messages into.
+        logfmt: log string format to use.
     """
-    logfmt = "{time:%Y-%m-%dT%H:%M:%S%z} <level>[{level: <7}]</level> [{name: <10}] [{function: <20}]: {message}"  # noqa: E501
-
     stdout_handler: dict[str, Any] = {
         "sink": sys.stdout,
         "level": loglevel,
         "format": logfmt,
+        "colorize": True,
     }
     file_handler: dict[str, Any] = {
         "sink": logfile,
         "level": loglevel,
         "format": logfmt,
+        "colorize": False,
     }
     handlers = [stdout_handler, file_handler] if logfile else [stdout_handler]
 
