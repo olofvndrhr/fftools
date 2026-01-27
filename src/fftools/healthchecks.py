@@ -15,7 +15,12 @@ class HealthChecks:
     """
 
     def __init__(
-        self, url: str, path: str, ping_key: str | None = None, user_agent: str | None = None
+        self,
+        url: str,
+        path: str,
+        ping_key: str | None = None,
+        user_agent: str | None = None,
+        create: bool = False,
     ) -> None:
         """Init the healthchecks api.
 
@@ -25,17 +30,22 @@ class HealthChecks:
                 else only the part after the `ping_key`.
             ping_key: ping key to use.
             user_agent: custom user-agent to set for requests.
+            create: set ?create=1 to the ping url parameters
         """
         self.hc_hostname = socket.gethostname().replace(".", "")
         self.host = url
         self.path = path.replace("<HOSTNAME>", self.hc_hostname)
         self.ping_key = ping_key
         self.user_agent = user_agent
+        self.create = create
 
         self.url = self._get_url()
         self.headers = {"User-Agent": self.user_agent} if self.user_agent else None
+        self.params = {"create": 1} if self.create else None
 
-        log.debug(f"init healthchecks={self.url}, user-agent={self.user_agent}")
+        log.debug(
+            f"init healthchecks={self.url}, user-agent={self.user_agent}, create={self.create}"
+        )
 
     def _get_url(self) -> str:
         path = f"ping/{self.path}"
@@ -53,7 +63,9 @@ class HealthChecks:
         ping_url = self.url + path
 
         try:
-            result = req("POST", ping_url, payload=message, headers=self.headers)
+            result = req(
+                "POST", ping_url, payload=message, headers=self.headers, params=self.params
+            )
             result.raise_for_status()
         except Exception as exc:
             log.error(f"can't ping health-checks. exc={exc}")

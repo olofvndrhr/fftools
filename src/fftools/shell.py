@@ -51,7 +51,7 @@ def run_command(
         ],
     )
 
-    log.info(f"running command='{' '.join(cmd)}'. {timeout=}")
+    log.debug(f"running command='{' '.join(cmd)}'. {timeout=}")
     try:
         proc = subprocess.run(
             cmd,
@@ -118,7 +118,7 @@ def run_ssh_command(
         ],
     )
 
-    log.info(
+    log.debug(
         f"running ssh command on host={username}@{hostname}:{port}, command='{cmd}'. {timeout=}",
     )
     try:
@@ -169,7 +169,7 @@ def extract_archive(archive: Path) -> None:
 
     if archive_suffix in tarzip_suffixes:
         extract_dir = archive.parent / archive.name.removesuffix(archive_suffix)
-        log.info(f"extracting tarzip archive={archive}, extract to={extract_dir}")
+        log.debug(f"extracting tarzip archive={archive}, extract to={extract_dir}")
         shutil.unpack_archive(archive, extract_dir)
     elif archive_suffix in bz_suffixes:
         extract_file("bzip", archive, archive.with_suffix(""))
@@ -192,7 +192,7 @@ def extract_file(atype: Literal["gzip", "bzip", "xz"], infile: Path, outfile: Pa
     Raises:
         ValueError: on invalid `atype`.
     """
-    log.info(f"extracting {atype} file={infile} -> {outfile}")
+    log.debug(f"extracting {atype} file={infile} -> {outfile}")
     try:
         match atype:
             case "gzip":

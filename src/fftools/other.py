@@ -21,9 +21,9 @@ def progress_bar(progress: float, total: float) -> None:
     whitespace_texture = " " * (bar_length - bar_progress)
     if progress == total:
         full_bar = "■" * bar_length
-        log.info(f"\r[ PROGRESS ] ❙{full_bar}❙ 100%", end="\n")
+        print(f"\r[ PROGRESS ] ❙{full_bar}❙ 100%", end="\n")  # noqa: T201
     else:
-        log.info(
+        print(  # noqa: T201
             f"\r[ PROGRESS ] ❙{bar_texture}{whitespace_texture}❙ {percent}%",
             end="\r",
         )
@@ -90,11 +90,11 @@ def wait_random(max_seconds: int) -> None:
         max_seconds: max seconds to wait.
     """
     if max_seconds <= 1:
-        log.info("skipping wait")
+        log.debug("skipping wait")
         return
 
     wait_time = random.randrange(1, max_seconds + 1)  # noqa: S311
-    log.info(f"waiting {wait_time} seconds")
+    log.debug(f"waiting {wait_time} seconds")
     sleep(wait_time)
 
 

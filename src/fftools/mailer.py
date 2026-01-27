@@ -35,7 +35,7 @@ def send_mail(
     """
     receivers_list = receivers if isinstance(receivers, list) else [receivers]
 
-    log.info(f"sending mail to: {', '.join(receivers_list)}")
+    log.debug(f"sending mail to: {', '.join(receivers_list)}")
     try:
         smtp = yagmail.SMTP(
             user=smtp_sender,
@@ -50,7 +50,7 @@ def send_mail(
             contents=yagmail.raw(message),
             attachments=attachments,
         )
-        log.info("email sent successfully")
+        log.debug("email sent successfully")
     except Exception as exc:
         log.error(f"something went wrong. {exc=}")
         raise

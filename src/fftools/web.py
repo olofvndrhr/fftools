@@ -46,7 +46,7 @@ def download_file(
     )
     auth = httpx.BasicAuth(username=username, password=password) if username and password else None
 
-    log.info(f"HTTP DOWNLOAD {url}")
+    log.debug(f"HTTP DOWNLOAD {url}")
     try:
         with (
             httpx.stream(
@@ -110,7 +110,7 @@ def upload_file(
     )
     auth = httpx.BasicAuth(username=username, password=password) if username and password else None
 
-    log.info(f"HTTP UPLOAD {method} {url}")
+    log.debug(f"HTTP UPLOAD {method} {url}")
     try:
         files = {"upload-file": file_path.open("rb")}
         response = httpx.request(
@@ -185,7 +185,7 @@ def req(
 
     auth = httpx.BasicAuth(username=username, password=password) if username and password else None
 
-    log.info(f"HTTP {method} {url}")
+    log.debug(f"HTTP {method} {url}")
     try:
         response = httpx.request(
             method=method,
@@ -226,7 +226,7 @@ def dig(fqdn: str, record_type: str) -> list[str]:
     resolver.timeout = 5
     resolver.lifetime = 5
 
-    log.info(f"DIG {fqdn}")
+    log.debug(f"DIG {fqdn}")
 
     try:
         answer = resolver.resolve(fqdn, record_type)
@@ -237,5 +237,5 @@ def dig(fqdn: str, record_type: str) -> list[str]:
         log.warning(f"error while resolving record(s). {exc=}")
         raise
 
-    log.info(f"resolved record(s) {fqdn=}, {resolved_records=}")
+    log.debug(f"resolved record(s) {fqdn=}, {resolved_records=}")
     return resolved_records
