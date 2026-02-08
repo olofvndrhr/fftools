@@ -71,25 +71,25 @@ cov = ["test-cov", "cov-report"]
 
 [tool.hatch.envs.lint]
 python = "3.12"
-detached = true
 dependencies = [
-    "mypy==1.19.1",
+    "basedpyright==1.37.2",
     "ruff==0.14.14",
-    "pydantic~=2.12.5",
 ]
 
 [tool.hatch.envs.lint.scripts]
-typing = "mypy --non-interactive --install-types {args:src/fftools}"
+# typing = "mypy --non-interactive --install-types {args:src}"
+typing = "basedpyright {args:src}"
 style = [
     "ruff check --no-fix {args:.}",
     "ruff format --diff {args:.}",
 ]
+unused = ["dead"]
+all = ["style", "typing"]
 fmt = [
     "ruff check --fix {args:.}",
     "ruff format {args:.}",
     "style",
 ]
-all = ["style", "typing"]
 
 [tool.hatch.envs.docs]
 python = "3.12"
@@ -212,6 +212,19 @@ show_error_context     = true
 #init_forbid_extra = true
 #init_typed = true
 #warn_required_dynamic_aliases = true
+
+###
+### basedpyright
+###
+
+[tool.basedpyright]
+pythonVersion = "3.12"
+include = ["src"]
+typeCheckingMode = "standard"
+reportMissingTypeStubs = false
+executionEnvironments = [
+    { root = "tests", reportMissingImports = false },
+]
 
 ###
 ### pytest

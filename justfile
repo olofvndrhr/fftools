@@ -1,14 +1,16 @@
 #!/usr/bin/env just --justfile
 
-default: show_receipts
+default: show-receipts
 
 set shell := ["bash", "-uc"]
+set windows-shell := ["powershell.exe", "-NoLogo", "-Command"]
 set dotenv-load := true
 
-show_receipts:
+show-receipts:
+    just show-system-info
     just --list
 
-show_system_info:
+show-system-info:
     @echo "=================================="
     @echo "os : {{ os() }}"
     @echo "arch: {{ arch() }}"
@@ -20,72 +22,58 @@ show_system_info:
 setup:
     asdf install
 
-create_venv:
+create-venv:
     @echo "creating venvs"
     hatch env create
     hatch env show
 
-create_reqs:
+create-reqs:
     @echo "creating requirements files"
     hatch dep show requirements --project-only > requirements.txt
-    hatch dep show requirements --env-only > requirements_dev.txt
+    hatch dep show requirements --env-only > requirements-dev.txt
 
-create_pipreqs:
+create-pipreqs:
     @echo "creating requirements (pipreqs)"
     pipreqs --force --savepath requirements.txt src/
 
-install_deps:
+install-deps:
     @echo "installing dependencies locally"
     hatch dep show requirements --project-only > requirements.tmp
     pip install -r requirements.tmp
 
-install_deps_dev:
+install-deps-dev:
     @echo "installing dev dependencies locally"
-    hatch dep show requirements --env-only > requirements_dev.tmp
-    pip install -r requirements_dev.tmp
-
-test_shfmt:
-    @echo "testing with shfmt"
-    find . -type f \( -name "**.sh" -and -not -path "./.**" -and -not -path "./venv**" \) -exec shfmt -d -i 4 -bn -ci -sr "{}" \+;
-
-format_shfmt:
-    @echo "formatting with shfmt"
-    find . -type f \( -name "**.sh" -and -not -path "./.**" -and -not -path "./venv**" \) -exec shfmt -w -i 4 -bn -ci -sr "{}" \+;
+    hatch dep show requirements --env-only > requirements-dev.tmp
+    pip install -r requirements-dev.tmp
 
 lint *args:
     @echo "linting project"
-    just show_system_info
-    just test_shfmt
+    shfmt -d -i 4 -bn -ci -sr .
     hatch run lint:all {{ args }}
 
 format *args:
     @echo "formatting project"
-    just show_system_info
-    just format_shfmt
+    shfmt -w -i 4 -bn -ci -sr .
     hatch run lint:fmt {{ args }}
 
-check *args:
-    just format {{ args }}
-    just lint {{ args }}
+check:
+    just format
+    just lint
 
 test *args:
     @echo "running tests"
-    just show_system_info
     hatch run test:test {{ args }}
 
 coverage *args:
     @echo "running tests with coverage report"
-    just show_system_info
     hatch run test:cov {{ args }}
 
 build *args:
     @echo "building project"
-    just show_system_info
     hatch build --clean {{ args }}
 
-get-docs *args:
+get-docs:
     @echo "getting docs"
-    just show_system_info
     bash docs/get_docs.sh
 
 build-docs *args:
