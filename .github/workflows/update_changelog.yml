@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           ref: main
@@ -25,7 +25,7 @@ jobs:
           --ignore-commit-pattern '[Bb]ump version|[Uu]pdate changelog|[Mm]erge pull request'
 
       - name: commit and push changelog
-        uses: EndBug/add-and-commit@v9
+        uses: EndBug/add-and-commit@v10
         with:
           add: CHANGELOG.md
           message: "[bot] update changelog"
