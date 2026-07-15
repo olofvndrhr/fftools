@@ -1,42 +1,85 @@
-[build-system]
-requires = [
-    "hatchling==1.27.0",
-    "hatch-regex-commit==0.0.3",
-]
-build-backend = "hatchling.build"
-
 [project]
 name = "fftools"
 description = "44net tools"
 readme = "README.md"
-license = "MIT"
 requires-python = ">=3.12"
-dynamic = ["version"]
+license = "MIT"
 authors = [
-    { name = "Ivan Schaller", email = "ivan@schaller.sh" },
+  { name = "Ivan Schaller", email = "ivan@schaller.sh" },
 ]
 classifiers = [
-    "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.12",
 ]
 dependencies = [
-    "dnspython>=2.7.0",
-    "httpx>=0.28.1",
-    "loguru>=0.7.3",
-    "Fabric>=3.2.2",
-    "tenacity>=9.1.2",
-    "yagmail>=0.15.293",
-    "whenever>=0.8.0",
+  "Fabric>=3.2.2",
+  "dnspython>=2.7.0",
+  "httpx2>=2.5.0",
+  "loguru>=0.7.3",
+  "tenacity>=9.1.2",
+  "whenever>=0.8.0",
+  "yagmail>=0.15.293",
 ]
+dynamic = ["version"]
 
 [project.urls]
+History = "https://github.com/olofvndrhr/fftools/commits/master"
 Homepage = "https://github.com/olofvndrhr/fftools"
-History  = "https://github.com/olofvndrhr/fftools/commits/master"
-Tracker  = "https://github.com/olofvndrhr/fftools/issues"
-Source   = "https://github.com/olofvndrhr/fftools"
+Source = "https://github.com/olofvndrhr/fftools"
+Tracker = "https://github.com/olofvndrhr/fftools/issues"
+
+[build-system]
+requires = [
+  "hatch-regex-commit==0.0.3",
+  "hatchling==1.27.0",
+]
+build-backend = "hatchling.build"
+
+[tool.basedpyright]
+pythonVersion = "3.12"
+include = ["src"]
+typeCheckingMode = "standard"
+reportMissingTypeStubs = false
+executionEnvironments = [
+  { root = "tests", reportMissingImports = false },
+]
+
+[tool.coverage.run]
+source_pkgs = ["fftools", "tests"]
+branch = true
+parallel = true
+omit = ["src/fftools/__about__.py"]
+
+[tool.coverage.paths]
+fftools = [
+  "src/fftools",
+  "*/fftools/src/fftools",
+]
+tests = ["tests", "*/fftools/tests"]
+
+[tool.coverage.report]
+# Regexes for lines to exclude from consideration
+exclude_lines = [
+  # Have to re-enable the standard pragma
+  "pragma: no cover",
+  # Don't complain about missing debug-only code:
+  "def __repr__",
+  "if self.debug",
+  # Don't complain if tests don't hit defensive assertion code:
+  "raise AssertionError",
+  "raise NotImplementedError",
+  # Don't complain if non-runnable code isn't run:
+  "if 0:",
+  "if __name__ == .__main__.:",
+  # Don't complain about abstract methods, they aren't run:
+  "@(abc.)?abstractmethod",
+  "no cov",
+  "if TYPE_CHECKING:",
+]
+# ignore_errors = true
 
 [tool.hatch.version]
-source   = "regex_commit"
-path     = "src/fftools/__about__.py"
+source = "regex_commit"
+path = "src/fftools/__about__.py"
 tag_sign = false
 
 [tool.hatch.build.targets.sdist]
@@ -45,115 +88,127 @@ packages = ["src/fftools"]
 [tool.hatch.build.targets.wheel]
 packages = ["src/fftools"]
 
-###
-### envs
-###
-
 [tool.hatch.envs.test]
 python = "3.12"
 dependencies = [
-    "pytest==9.0.2",
-    "coverage==7.13.2",
+  "pytest==9.0.2",
+  "coverage==7.13.2",
 ]
 
 [tool.hatch.envs.test.scripts]
 test = "pytest {args:tests}"
 test-cov = [
-    "coverage erase",
-    "coverage run -m pytest {args:tests}",
+  "coverage erase",
+  "coverage run -m pytest {args:tests}",
 ]
 cov-report = [
-    "- coverage combine",
-    "coverage report",
-    "coverage xml",
+  "- coverage combine",
+  "coverage report",
+  "coverage xml",
 ]
 cov = ["test-cov", "cov-report"]
 
 [tool.hatch.envs.lint]
 python = "3.12"
 dependencies = [
-    "basedpyright==1.37.2",
-    "ruff==0.14.14",
+  "basedpyright==1.39.9",
+  "ruff==0.15.20",
 ]
 
 [tool.hatch.envs.lint.scripts]
 # typing = "mypy --non-interactive --install-types {args:src}"
 typing = "basedpyright {args:src}"
 style = [
-    "ruff check --no-fix {args:.}",
-    "ruff format --diff {args:.}",
+  "ruff check --no-fix {args:.}",
+  "ruff format --diff {args:.}",
 ]
 unused = ["dead"]
 all = ["style", "typing"]
 fmt = [
-    "ruff check --fix {args:.}",
-    "ruff format {args:.}",
-    "style",
+  "ruff check --fix {args:.}",
+  "ruff format {args:.}",
+  "style",
 ]
 
 [tool.hatch.envs.docs]
 python = "3.12"
 dependencies = [
-    "Sphinx==8.2.3",
-    "furo==2025.7.19",
-    "myst-parser==4.0.1",
-    "sphinx-copybutton==0.5.2",
+  "Sphinx==8.2.3",
+  "furo==2025.7.19",
+  "myst-parser==4.0.1",
+  "sphinx-copybutton==0.5.2",
 ]
 
 [tool.hatch.envs.docs.scripts]
 build = "sphinx-build -M html {root}/docs {root}/docs/_build {args:}"
 
-###
-### ruff
-###
+[tool.mypy]
+# plugins = ["pydantic.mypy"]
+follow_imports = "silent"
+warn_redundant_casts = true
+warn_unused_ignores = true
+disallow_any_generics = true
+check_untyped_defs = true
+no_implicit_reexport = true
+ignore_missing_imports = true
+warn_return_any = true
+pretty = true
+show_column_numbers = true
+show_error_codes = true
+show_error_context = true
+
+# [tool.pydantic-mypy]
+# init_forbid_extra = true
+# init_typed = true
+# warn_required_dynamic_aliases = true
+
+[tool.pytest.ini_options]
+addopts = "--color=yes --exitfirst --verbose -ra"
+filterwarnings = [
+  "ignore:Jupyter is migrating its paths to use standard platformdirs:DeprecationWarning",
+]
+pythonpath = ["src"]
 
 [tool.ruff]
-target-version    = "py312"
-line-length       = 100
-indent-width      = 4
-fix               = true
-show-fixes        = true
+target-version = "py312"
+line-length = 100
+indent-width = 4
+fix = true
+show-fixes = true
 respect-gitignore = true
-src               = ["src", "tests"]
+src = ["src", "tests"]
 
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
-    "ANN002",
-    "ANN003",
-    "ANN401",
-    "BLE001",
-    "COM812",
-    "D100",
-    "D102",
-    "D103",
-    "EM101",
-    "FBT",
-    "G004",
-    "SLF001",
-    "TRY003",
-    "TRY301",
-    "COM819",
+  "ANN002",
+  "ANN003",
+  "ANN401",
+  "BLE001",
+  "COM812",
+  "D100",
+  "D102",
+  "D103",
+  "EM101",
+  "FBT",
+  "G004",
+  "SLF001",
+  "TRY003",
+  "TRY301",
+  "COM819",
 ]
 fixable = ["ALL"]
 unfixable = []
-
-[tool.ruff.format]
-quote-style               = "double"
-indent-style              = "space"
-skip-magic-trailing-comma = false
-line-ending               = "lf"
-docstring-code-format     = true
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["D104"]
 "__about__.py" = ["D104", "F841"]
 "tests/**/*" = [
-    "E501",
-    "PLR2004",
-    "S101",
-    "TID252",
-    "PGH003",
+  "E501",
+  "PLR2004",
+  "S101",
+  "TID252",
+  "PGH003",
 ]
 "src/fftools/shell.py" = ["S603"]
 
@@ -162,7 +217,7 @@ keep-runtime-typing = true
 
 [tool.ruff.lint.isort]
 lines-after-imports = 2
-known-first-party   = ["fftools"]
+known-first-party = ["fftools"]
 
 [tool.ruff.lint.flake8-tidy-imports]
 ban-relative-imports = "all"
@@ -173,11 +228,11 @@ max-returns = 12
 max-statements = 100
 max-args = 15
 allow-magic-value-types = [
-    "str",
-    "bytes",
-    "complex",
-    "float",
-    "int",
+  "str",
+  "bytes",
+  "complex",
+  "float",
+  "int",
 ]
 
 [tool.ruff.lint.mccabe]
@@ -189,88 +244,9 @@ convention = "google"
 [tool.ruff.lint.pycodestyle]
 max-doc-length = 100
 
-###
-### mypy
-###
-
-[tool.mypy]
-#plugins = ["pydantic.mypy"]
-follow_imports         = "silent"
-warn_redundant_casts   = true
-warn_unused_ignores    = true
-disallow_any_generics  = true
-check_untyped_defs     = true
-no_implicit_reexport   = true
-ignore_missing_imports = true
-warn_return_any        = true
-pretty                 = true
-show_column_numbers    = true
-show_error_codes       = true
-show_error_context     = true
-
-#[tool.pydantic-mypy]
-#init_forbid_extra = true
-#init_typed = true
-#warn_required_dynamic_aliases = true
-
-###
-### basedpyright
-###
-
-[tool.basedpyright]
-pythonVersion = "3.12"
-include = ["src"]
-typeCheckingMode = "standard"
-reportMissingTypeStubs = false
-executionEnvironments = [
-    { root = "tests", reportMissingImports = false },
-]
-
-###
-### pytest
-###
-
-[tool.pytest.ini_options]
-pythonpath = ["src"]
-addopts = "--color=yes --exitfirst --verbose -ra"
-filterwarnings = [
-    'ignore:Jupyter is migrating its paths to use standard platformdirs:DeprecationWarning',
-]
-
-###
-### coverage
-###
-
-[tool.coverage.run]
-source_pkgs = ["fftools", "tests"]
-branch      = true
-parallel    = true
-omit        = ["src/fftools/__about__.py"]
-
-[tool.coverage.paths]
-fftools = [
-    "src/fftools",
-    "*/fftools/src/fftools",
-]
-tests = ["tests", "*/fftools/tests"]
-
-[tool.coverage.report]
-# Regexes for lines to exclude from consideration
-exclude_lines = [
-    # Have to re-enable the standard pragma
-    "pragma: no cover",
-    # Don't complain about missing debug-only code:
-    "def __repr__",
-    "if self.debug",
-    # Don't complain if tests don't hit defensive assertion code:
-    "raise AssertionError",
-    "raise NotImplementedError",
-    # Don't complain if non-runnable code isn't run:
-    "if 0:",
-    "if __name__ == .__main__.:",
-    # Don't complain about abstract methods, they aren't run:
-    "@(abc.)?abstractmethod",
-    "no cov",
-    "if TYPE_CHECKING:",
-]
-# ignore_errors = true
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "lf"
+docstring-code-format = true

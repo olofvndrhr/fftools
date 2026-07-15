@@ -2,7 +2,7 @@ from pathlib import Path
 from typing import Any, Literal
 
 import dns.resolver
-import httpx
+import httpx2
 from loguru import logger as log
 
 from fftools.other import pop_dict
@@ -18,7 +18,7 @@ def download_file(
     password: str | None = None,
     **kwargs,
 ) -> None:
-    """Download a file with httpx.stream.
+    """Download a file with httpx2.stream.
 
     Args:
         url: url of the file.
@@ -28,7 +28,7 @@ def download_file(
         chunk_size: size of the chunks which are downloaded.
         username: username for basic auth. if unset no authentication is used.
         password: password for basic auth. if unset no authentication is used.
-        kwargs: other kwargs directly supplied to `httpx.request`
+        kwargs: other kwargs directly supplied to `httpx2.request`
 
     Raises:
         ValueError: if requested file size is 0 bytes.
@@ -44,12 +44,12 @@ def download_file(
             "auth",
         ],
     )
-    auth = httpx.BasicAuth(username=username, password=password) if username and password else None
+    auth = httpx2.BasicAuth(username=username, password=password) if username and password else None
 
     log.debug(f"HTTP DOWNLOAD {url}")
     try:
         with (
-            httpx.stream(
+            httpx2.stream(
                 "GET",
                 url,
                 timeout=timeout,
@@ -81,8 +81,8 @@ def upload_file(
     username: str | None = None,
     password: str | None = None,
     **kwargs,
-) -> httpx.Response:
-    """Upload a file with httpx.
+) -> httpx2.Response:
+    """Upload a file with httpx2.
 
     Args:
         method: http method to use for the upload.
@@ -91,13 +91,13 @@ def upload_file(
         timeout: timeout of the request in seconds.
         username: username for basic auth. if unset no authentication is used.
         password: password for basic auth. if unset no authentication is used.
-        kwargs: other kwargs directly supplied to `httpx.request`
+        kwargs: other kwargs directly supplied to `httpx2.request`
 
     Raises:
         exc: on upload errors.
 
     Returns:
-        A `httpx.Response` object.
+        A `httpx2.Response` object.
     """
     # remove args from kwargs
     filtered_kwargs = pop_dict(
@@ -108,12 +108,12 @@ def upload_file(
             "auth",
         ],
     )
-    auth = httpx.BasicAuth(username=username, password=password) if username and password else None
+    auth = httpx2.BasicAuth(username=username, password=password) if username and password else None
 
     log.debug(f"HTTP UPLOAD {method} {url}")
     try:
         files = {"upload-file": file_path.open("rb")}
-        response = httpx.request(
+        response = httpx2.request(
             method=method,
             url=url,
             timeout=timeout,
@@ -138,7 +138,7 @@ def req(
     username: str | None = None,
     password: str | None = None,
     **kwargs,
-) -> httpx.Response:
+) -> httpx2.Response:
     """Make a http(s) request.
 
     Args:
@@ -150,13 +150,13 @@ def req(
         payload: data to send. either `dict`, `str` or `bytes`.
         username: username for basic auth. if unset no authentication is used.
         password: password for basic auth. if unset no authentication is used.
-        kwargs: other kwargs directly supplied to `httpx.request`
+        kwargs: other kwargs directly supplied to `httpx2.request`
 
     Raises:
         exc: on request errors.
 
     Returns:
-        A `httpx.Response` object
+        A `httpx2.Response` object
     """
     _default_headers = {
         "accept": "application/json",
@@ -183,11 +183,11 @@ def req(
         ],
     )
 
-    auth = httpx.BasicAuth(username=username, password=password) if username and password else None
+    auth = httpx2.BasicAuth(username=username, password=password) if username and password else None
 
     log.debug(f"HTTP {method} {url}")
     try:
-        response = httpx.request(
+        response = httpx2.request(
             method=method,
             url=url,
             timeout=timeout,
